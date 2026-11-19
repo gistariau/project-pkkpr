@@ -1,0 +1,3777 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>PKKPR - Status Proses Penerbitan Penilaian KKPR Kab. Kampar</title>
+  <meta name="description" content="Sistem Informasi Administrasi Pemantauan dan Evaluasi Status Proses Penerbitan Persetujuan Kesesuaian Kegiatan Pemanfaatan Ruang (PKKPR) Kabupaten Kampar." />
+  <meta name="keywords" content="PKKPR Kabupaten Kampar, Status PKKPR Kampar, Progress PKKPR, Proses Penerbitan KKPR, Penilaian KKPR Kabupaten Kampar" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="author" content="PT. GISTARIAU GEOSPASIAL SOLUTION" />
+
+  <!-- Open Graph Metadata -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:title" content="PKKPR - Status Proses Penerbitan Penilaian KKPR Kab. Kampar" />
+  <meta property="og:description" content="Sistem Informasi Pemantauan Progres Permohonan, Survey Lapangan, Rapat Forum Penataan Ruang, dan Penerbitan PKKPR Kabupaten Kampar." />
+  <meta property="og:image" content="https://lh3.googleusercontent.com/a/ACg8ocKwa56EqjiXGTcTzJCjhlvHVD1_cjafyhnuBK5As9X9z1r7tS8J=s360-c-no" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/a/ACg8ocKwa56EqjiXGTcTzJCjhlvHVD1_cjafyhnuBK5As9X9z1r7tS8J=s360-c-no" />
+  <link rel="apple-touch-icon" href="https://lh3.googleusercontent.com/a/ACg8ocKwa56EqjiXGTcTzJCjhlvHVD1_cjafyhnuBK5As9X9z1r7tS8J=s360-c-no" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Space Grotesk & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+
+  <!-- External Libraries (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       1. RETRO MODERN DESIGN TOKENS (LIGHT & DARK MODE)
+       ========================================================================== */
+    :root {
+      --bg-base: #F6F1E7;
+      --bg-surface: #FFFDF9;
+      --bg-elevated: #FFFFFF;
+      --bg-subtle: #EDE5D6;
+      --bg-input: #FAF7F0;
+
+      --color-navy: #162B49;
+      --color-navy-light: #24416B;
+      --color-teal: #1E6B7B;
+      --color-teal-soft: rgba(30, 107, 123, 0.12);
+      --color-mustard: #D99B26;
+      --color-mustard-soft: rgba(217, 155, 38, 0.16);
+      --color-orange: #C85A32;
+      --color-orange-soft: rgba(200, 90, 50, 0.14);
+      --color-success: #227A53;
+      --color-success-soft: rgba(34, 122, 83, 0.14);
+      --color-danger: #B9382C;
+      --color-danger-soft: rgba(185, 56, 44, 0.14);
+
+      --text-primary: #1B2430;
+      --text-secondary: #4E5B6B;
+      --text-muted: #727F90;
+      --text-inverse: #FFFDF9;
+
+      --border-color: #D4C8B4;
+      --border-strong: #162B49;
+      --grid-line: rgba(22, 43, 73, 0.045);
+
+      --shadow-retro: 4px 4px 0px rgba(22, 43, 73, 0.14);
+      --shadow-retro-lg: 6px 6px 0px rgba(22, 43, 73, 0.18);
+      --shadow-soft: 0 8px 24px rgba(22, 43, 73, 0.08);
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --sidebar-width: 272px;
+      --transition-speed: 0.22s;
+    }
+
+    [data-theme="dark"] {
+      --bg-base: #0E1622;
+      --bg-surface: #152030;
+      --bg-elevated: #1B293D;
+      --bg-subtle: #22324A;
+      --bg-input: #111B29;
+
+      --color-navy: #2A4B7C;
+      --color-navy-light: #3A639E;
+      --color-teal: #2E95AA;
+      --color-teal-soft: rgba(46, 149, 170, 0.18);
+      --color-mustard: #E8AD38;
+      --color-mustard-soft: rgba(232, 173, 56, 0.18);
+      --color-orange: #E07046;
+      --color-orange-soft: rgba(224, 112, 70, 0.18);
+      --color-success: #34A873;
+      --color-success-soft: rgba(52, 168, 115, 0.18);
+      --color-danger: #E05346;
+      --color-danger-soft: rgba(224, 83, 70, 0.18);
+
+      --text-primary: #F2EDE2;
+      --text-secondary: #B8C4D4;
+      --text-muted: #8494A8;
+      --text-inverse: #0E1622;
+
+      --border-color: #2D3F59;
+      --border-strong: #4A6894;
+      --grid-line: rgba(242, 237, 226, 0.03);
+
+      --shadow-retro: 4px 4px 0px rgba(0, 0, 0, 0.42);
+      --shadow-retro-lg: 6px 6px 0px rgba(0, 0, 0, 0.5);
+      --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE RETRO-GRID CANVAS
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100vh;
+      font-family: var(--font-sans);
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 28px 28px;
+      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+    }
+
+    a {
+      color: var(--color-teal);
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: 0.95rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ==========================================================================
+       3. RETRO MODERN UI COMPONENTS (CARDS, BUTTONS, FORMS, BADGES)
+       ========================================================================== */
+    .retro-card {
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-retro);
+      padding: 1.35rem;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background-color var(--transition-speed) ease;
+    }
+
+    .retro-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.1rem;
+      border-bottom: 1.5px dashed var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .retro-card-title {
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--text-primary);
+    }
+
+    .retro-stripe {
+      height: 5px;
+      width: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        #162B49 0px,
+        #162B49 24px,
+        #1E6B7B 24px,
+        #1E6B7B 48px,
+        #D99B26 48px,
+        #D99B26 72px,
+        #C85A32 72px,
+        #C85A32 96px
+      );
+      border-radius: 99px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.62rem 1.15rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-strong);
+      cursor: pointer;
+      transition: all 0.16s ease;
+      user-select: none;
+      min-height: 40px;
+      white-space: nowrap;
+    }
+
+    .btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .btn:not(:disabled):hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px var(--border-strong);
+    }
+
+    .btn:not(:disabled):active {
+      transform: translate(1px, 1px);
+      box-shadow: none;
+    }
+
+    .btn-primary {
+      background: #162B49;
+      color: #FFFDF9;
+      border-color: #162B49;
+    }
+
+    [data-theme="dark"] .btn-primary {
+      background: #2E95AA;
+      color: #0E1622;
+      border-color: #2E95AA;
+    }
+
+    .btn-teal {
+      background: var(--color-teal);
+      color: #FFFFFF;
+      border-color: #154E5A;
+    }
+
+    .btn-mustard {
+      background: var(--color-mustard);
+      color: #162B49;
+      border-color: #9A6B12;
+    }
+
+    .btn-orange {
+      background: var(--color-orange);
+      color: #FFFFFF;
+      border-color: #8F3B1D;
+    }
+
+    .btn-danger {
+      background: var(--color-danger);
+      color: #FFFFFF;
+      border-color: #7E2219;
+    }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border-color: var(--border-color);
+    }
+
+    .btn-sm {
+      padding: 0.38rem 0.72rem;
+      font-size: 0.8rem;
+      min-height: 34px;
+    }
+
+    /* Form Inputs */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.38rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .form-label .req {
+      color: var(--color-orange);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      background: var(--bg-input);
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+      min-height: 42px;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-teal);
+      box-shadow: 0 0 0 3px var(--color-teal-soft);
+    }
+
+    .form-control[readonly] {
+      background: var(--bg-subtle);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      cursor: default;
+    }
+
+    textarea.form-control {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      padding: 0.24rem 0.6rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border: 1px solid transparent;
+    }
+
+    .badge-navy { background: rgba(22, 43, 73, 0.12); color: #162B49; border-color: rgba(22, 43, 73, 0.25); }
+    [data-theme="dark"] .badge-navy { background: rgba(74, 104, 148, 0.25); color: #D8E6F8; border-color: rgba(74, 104, 148, 0.45); }
+    .badge-teal { background: var(--color-teal-soft); color: var(--color-teal); border-color: rgba(30, 107, 123, 0.3); }
+    .badge-mustard { background: var(--color-mustard-soft); color: #96660B; border-color: rgba(217, 155, 38, 0.35); }
+    [data-theme="dark"] .badge-mustard { color: #F2C057; }
+    .badge-orange { background: var(--color-orange-soft); color: var(--color-orange); border-color: rgba(200, 90, 50, 0.35); }
+    .badge-success { background: var(--color-success-soft); color: var(--color-success); border-color: rgba(34, 122, 83, 0.35); }
+
+    /* ==========================================================================
+       4. LOGIN SCREEN (RETRO ADMINISTRATIVE PORTAL)
+       ========================================================================== */
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+    }
+
+    .login-center {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 440px;
+      background: var(--bg-elevated);
+      border: 2px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-retro-lg);
+      overflow: hidden;
+      animation: fadeSlideUp 0.35s ease;
+    }
+
+    .login-header {
+      background: #162B49;
+      color: #FFFDF9;
+      padding: 1.75rem 1.5rem 1.4rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .login-logo-wrap {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 0.85rem;
+      background: #FFFDF9;
+      border-radius: 50%;
+      padding: 6px;
+      border: 3px solid var(--color-mustard);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .login-tag {
+      display: inline-block;
+      background: var(--color-mustard);
+      color: #162B49;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.18rem 0.65rem;
+      border-radius: 99px;
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.04em;
+    }
+
+    .login-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .login-subtitle {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      margin-top: 0.25rem;
+    }
+
+    .login-body {
+      padding: 1.65rem 1.5rem;
+    }
+
+    .alert-box {
+      padding: 0.75rem 0.95rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      border: 1.5px solid;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
+    }
+
+    .alert-danger {
+      background: var(--color-danger-soft);
+      border-color: var(--color-danger);
+      color: var(--color-danger);
+    }
+
+    .alert-warning {
+      background: var(--color-mustard-soft);
+      border-color: var(--color-mustard);
+      color: #8A5B06;
+    }
+
+    [data-theme="dark"] .alert-warning {
+      color: #F3C462;
+    }
+
+    /* ==========================================================================
+       5. MAIN DASHBOARD LAYOUT (SIDEBAR + TOPBAR + WORKSPACE)
+       ========================================================================== */
+    .app-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: #162B49;
+      color: #F6F1E7;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+      border-right: 2px solid #0F1E33;
+      transition: transform 0.26s ease;
+    }
+
+    .sidebar-brand {
+      padding: 1.25rem 1.15rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .sidebar-logo {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      background: #FFFDF9;
+      border-radius: 50%;
+      padding: 4px;
+      border: 2px solid var(--color-mustard);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .sidebar-brand-text h1 {
+      font-family: var(--font-display);
+      font-size: 1.02rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #FFFDF9;
+      line-height: 1.2;
+    }
+
+    .sidebar-brand-text span {
+      font-size: 0.74rem;
+      color: #E8AD38;
+      font-weight: 600;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .sidebar-user-card {
+      margin: 0.95rem 1rem 0.5rem;
+      padding: 0.72rem 0.85rem;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--color-teal);
+      color: #FFF;
+      font-weight: 800;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--color-mustard);
+      flex-shrink: 0;
+    }
+
+    .user-meta {
+      overflow: hidden;
+    }
+
+    .user-meta .uname {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #FFFDF9;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-meta .ustatus {
+      font-size: 0.72rem;
+      color: #86EFAC;
+      display: flex;
+      align-items: center;
+      gap: 0.32rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #4ADE80;
+      display: inline-block;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 0.65rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      overflow-y: auto;
+    }
+
+    .nav-section-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94A3B8;
+      padding: 0.5rem 0.65rem 0.2rem;
+    }
+
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.72rem 0.9rem;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      color: #E2E8F0;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.16s ease;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+    }
+
+    .nav-item.active {
+      background: var(--color-mustard);
+      color: #162B49;
+      font-weight: 700;
+      border-color: #F3C669;
+      box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-item.nav-logout {
+      margin-top: auto;
+      color: #FCA5A5;
+      border-color: rgba(252, 165, 165, 0.2);
+    }
+
+    .nav-item.nav-logout:hover {
+      background: rgba(185, 56, 44, 0.25);
+      color: #FFFFFF;
+    }
+
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 18, 30, 0.58);
+      z-index: 990;
+      backdrop-filter: blur(2px);
+    }
+
+    /* Main Content Area */
+    .main-area {
+      flex: 1;
+      margin-left: var(--sidebar-width);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .topbar {
+      background: var(--bg-surface);
+      border-bottom: 1.5px solid var(--border-color);
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 800;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+    }
+
+    .hamburger-btn {
+      display: none;
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .topbar-title-group {
+      min-width: 0;
+    }
+
+    .topbar-title {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .topbar-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 38px;
+    }
+
+    .workspace {
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 1480px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .view-section {
+      animation: fadeSlideUp 0.25s ease;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       6. DASHBOARD KPI CARDS & CHARTS
+       ========================================================================== */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.15rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-retro);
+      padding: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+    }
+
+    .kpi-navy::before { background: #162B49; }
+    .kpi-teal::before { background: var(--color-teal); }
+    .kpi-mustard::before { background: var(--color-mustard); }
+    .kpi-orange::before { background: var(--color-orange); }
+
+    .kpi-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .kpi-label {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+    }
+
+    .kpi-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .kpi-navy .kpi-icon { background: rgba(22, 43, 73, 0.12); color: #162B49; }
+    [data-theme="dark"] .kpi-navy .kpi-icon { background: rgba(74, 104, 148, 0.25); color: #93C5FD; }
+    .kpi-teal .kpi-icon { background: var(--color-teal-soft); color: var(--color-teal); }
+    .kpi-mustard .kpi-icon { background: var(--color-mustard-soft); color: #96660B; }
+    [data-theme="dark"] .kpi-mustard .kpi-icon { color: #F2C057; }
+    .kpi-orange .kpi-icon { background: var(--color-orange-soft); color: var(--color-orange); }
+
+    .kpi-value {
+      font-family: var(--font-display);
+      font-size: 2.15rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0.65rem 0 0.45rem;
+    }
+
+    .kpi-meta {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .process-banner {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.25rem;
+      margin-bottom: 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 310px;
+      width: 100%;
+    }
+
+    .filter-inline {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-inline select {
+      padding: 0.38rem 0.68rem;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       7. INPUT & EDIT FORM + 9 CHECKLIST PROGRESS
+       ========================================================================== */
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 1.25rem;
+    }
+
+    .progress-box {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      margin: 0.5rem 0 1.25rem;
+    }
+
+    .progress-bar-track {
+      height: 14px;
+      background: var(--bg-subtle);
+      border: 1.5px solid var(--border-color);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 0.65rem 0 1rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-teal), var(--color-mustard), var(--color-success));
+      transition: width 0.25s ease;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.72rem;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.68rem 0.85rem;
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .check-item:hover {
+      border-color: var(--color-teal);
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      accent-color: var(--color-teal);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .check-item.checked {
+      background: var(--color-teal-soft);
+      border-color: var(--color-teal);
+    }
+
+    .check-item-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .check-item-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .check-item-step {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* File Upload Zone */
+    .upload-zone {
+      border: 2px dashed var(--border-color);
+      background: var(--bg-surface);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      text-align: center;
+      transition: border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--color-teal);
+    }
+
+    .file-preview-card {
+      margin-top: 0.8rem;
+      padding: 0.75rem 0.95rem;
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .upload-progress-wrap {
+      margin-top: 0.75rem;
+    }
+
+    .form-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      padding-top: 0.75rem;
+      border-top: 1.5px dashed var(--border-color);
+    }
+
+    /* ==========================================================================
+       8. DATA TABLE, FILTERS & RESPONSIVE MOBILE CARDS
+       ========================================================================== */
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .table-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.9rem;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      background: var(--bg-elevated);
+    }
+
+    table.pkkpr-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+
+    table.pkkpr-table thead {
+      background: #162B49;
+      color: #FFFDF9;
+    }
+
+    table.pkkpr-table th {
+      padding: 0.82rem 0.75rem;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    table.pkkpr-table th:hover {
+      background: #213D66;
+    }
+
+    table.pkkpr-table td {
+      padding: 0.78rem 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    table.pkkpr-table tbody tr:hover {
+      background: var(--bg-subtle);
+    }
+
+    .cell-truncate {
+      max-width: 190px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .mini-progress-bar {
+      width: 110px;
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: 99px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      margin-top: 4px;
+    }
+
+    .mini-progress-fill {
+      height: 100%;
+      background: var(--color-teal);
+    }
+
+    .action-btns {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .pagination-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    /* ==========================================================================
+       9. MODAL & TOAST SYSTEM
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 20, 34, 0.65);
+      backdrop-filter: blur(3px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      animation: fadeIn 0.18s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-dialog {
+      background: var(--bg-elevated);
+      border: 2px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-retro-lg);
+      width: 100%;
+      max-width: 780px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-dialog.modal-sm {
+      max-width: 460px;
+    }
+
+    .modal-header {
+      background: #162B49;
+      color: #FFFDF9;
+      padding: 1rem 1.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: rgba(255, 255, 255, 0.14);
+      border: none;
+      color: #FFF;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-body {
+      padding: 1.35rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 0.95rem 1.35rem;
+      background: var(--bg-surface);
+      border-top: 1.5px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    /* Toast Container */
+    .toast-container {
+      position: fixed;
+      top: 1.1rem;
+      right: 1.1rem;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      max-width: calc(100vw - 2.2rem);
+      width: 370px;
+    }
+
+    .toast {
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-strong);
+      border-left: 6px solid var(--color-teal);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-retro);
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.65rem;
+      animation: fadeSlideUp 0.2s ease;
+    }
+
+    .toast.toast-success { border-left-color: var(--color-success); }
+    .toast.toast-error { border-left-color: var(--color-danger); }
+    .toast.toast-warning { border-left-color: var(--color-mustard); }
+
+    .toast-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 2px;
+    }
+
+    .toast-msg {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    /* Global Loading Overlay */
+    .loading-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-mustard), var(--color-orange), var(--color-teal));
+      z-index: 4000;
+      animation: loadingPulse 1.2s infinite linear;
+    }
+
+    @keyframes loadingPulse {
+      0% { opacity: 0.35; }
+      50% { opacity: 1; }
+      100% { opacity: 0.35; }
+    }
+
+    /* ==========================================================================
+       10. FOOTER
+       ========================================================================== */
+    .app-footer {
+      margin-top: auto;
+      background: var(--bg-surface);
+      border-top: 2px solid var(--border-color);
+      padding: 1.25rem 1.5rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .app-footer a {
+      color: var(--color-orange);
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       11. RESPONSIVE BREAKPOINTS (LAPTOP, TABLET, ANDROID, iOS)
+       ========================================================================== */
+    @media (max-width: 1180px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+      .search-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .sidebar-backdrop.open {
+        display: block;
+      }
+      .main-area {
+        margin-left: 0;
+      }
+      .hamburger-btn {
+        display: inline-flex;
+      }
+      .checklist-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Responsive Card Table for Tablet & Smartphone */
+      table.pkkpr-table thead {
+        display: none;
+      }
+      table.pkkpr-table,
+      table.pkkpr-table tbody,
+      table.pkkpr-table tr,
+      table.pkkpr-table td {
+        display: block;
+        width: 100%;
+      }
+      table.pkkpr-table tr {
+        margin-bottom: 1rem;
+        border: 1.5px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 0.75rem;
+        background: var(--bg-elevated);
+        box-shadow: var(--shadow-retro);
+      }
+      table.pkkpr-table td {
+        border-bottom: 1px dashed var(--border-color);
+        padding: 0.5rem 0.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
+        text-align: right;
+      }
+      table.pkkpr-table td:last-child {
+        border-bottom: none;
+        padding-top: 0.75rem;
+        justify-content: flex-end;
+      }
+      table.pkkpr-table td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        font-size: 0.78rem;
+        color: var(--text-secondary);
+        text-align: left;
+        flex-shrink: 0;
+      }
+      .cell-truncate {
+        max-width: 100%;
+        text-align: right;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid,
+      .form-grid-2,
+      .checklist-grid,
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+      .workspace {
+        padding: 1rem;
+      }
+      .topbar {
+        padding: 0.75rem 1rem;
+      }
+      .topbar-subtitle {
+        display: none;
+      }
+      .modal-dialog {
+        max-height: 94vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Network Activity Indicator -->
+  <div id="globalLoader" class="loading-bar hidden" aria-hidden="true"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- ========================================================================
+       SECTION A: LOGIN VIEW
+       ======================================================================== -->
+  <div id="loginView" class="login-wrapper">
+    <div class="login-center">
+      <div class="login-box">
+        <div class="login-header">
+          <div class="login-logo-wrap">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocKwa56EqjiXGTcTzJCjhlvHVD1_cjafyhnuBK5As9X9z1r7tS8J=s360-c-no" alt="Logo PKKPR Kabupaten Kampar" />
+          </div>
+          <span class="login-tag">SISTEM ADMINISTRASI TATA RUANG</span>
+          <h1 class="login-title">PKKPR - Status Proses Penerbitan Penilaian KKPR Kab. Kampar</h1>
+          <p class="login-subtitle">Silakan masuk menggunakan akun administrator terdaftar</p>
+        </div>
+        <div class="retro-stripe"></div>
+        <form id="loginForm" class="login-body" autocomplete="off">
+          <div id="loginErrorBox" class="alert-box alert-danger hidden" role="alert">
+            <span id="loginErrorText"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginUsername">Username <span class="req">*</span></label>
+            <input type="text" id="loginUsername" class="form-control" placeholder="Masukkan username" required autocomplete="username" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password <span class="req">*</span></label>
+            <input type="password" id="loginPassword" class="form-control" placeholder="Masukkan password" required autocomplete="current-password" />
+          </div>
+
+          <button type="submit" id="loginSubmitBtn" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            <span>MASUK KE SISTEM</span>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      <div>Copyright &copy; <span class="current-year"></span> - Aplikasi Status Permohonan PKKPR Kab. Kampar</div>
+      <div>Powered By GoogleAppScript | Secured By Cloudflare | Design By <a href="https://gistariau.com/" target="_blank" rel="noopener noreferrer">GISTARIAU</a></div>
+      <div>Hak Cipta Dilindungi Undang-Undang &bull; Di bawah Naungan PT. GISTARIAU GEOSPASIAL SOLUTION</div>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       SECTION B: MAIN APPLICATION SHELL (AUTHENTICATED)
+       ======================================================================== -->
+  <div id="appShell" class="app-shell hidden">
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar" aria-label="Navigasi Utama">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocKwa56EqjiXGTcTzJCjhlvHVD1_cjafyhnuBK5As9X9z1r7tS8J=s360-c-no" alt="Logo Aplikasi PKKPR" />
+        </div>
+        <div class="sidebar-brand-text">
+          <h1>PKKPR KAMPAR</h1>
+          <span>Penilaian KKPR Kab. Kampar</span>
+        </div>
+      </div>
+
+      <div class="sidebar-user-card">
+        <div class="user-avatar" id="sidebarUserInitial">A</div>
+        <div class="user-meta">
+          <div class="uname" id="sidebarUsername">admin</div>
+          <div class="ustatus"><span class="status-dot"></span> Sesi Aktif (WIB)</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Menu Utama</div>
+
+        <button type="button" class="nav-item active" data-view="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="input">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+          <span>Input Data</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="data">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Data PKKPR</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="export">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Ekspor Data</span>
+        </button>
+
+        <div class="nav-section-label">Pengaturan</div>
+
+        <button type="button" class="nav-item" data-view="admin">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Admin</span>
+        </button>
+
+        <button type="button" id="logoutBtn" class="nav-item nav-logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span>Logout</span>
+        </button>
+      </nav>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" id="hamburgerBtn" class="hamburger-btn" aria-label="Buka Menu Navigasi">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="topbar-title-group">
+            <div class="topbar-title" id="pageHeaderTitle">Dashboard Pemantauan PKKPR</div>
+            <div class="topbar-subtitle">Status Proses Penerbitan Penilaian KKPR Kab. Kampar</div>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button type="button" id="refreshAllBtn" class="btn btn-outline btn-sm" title="Sinkronkan Data Terbaru">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            <span>Sinkron</span>
+          </button>
+          <button type="button" id="themeToggleBtn" class="theme-toggle-btn" title="Ganti Tema Tampilan">
+            <span id="themeIcon">🌙</span>
+            <span id="themeLabel">Dark</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <!-- Default Password Security Warning Banner -->
+        <div id="defaultPassBanner" class="alert-box alert-warning hidden" style="justify-content: space-between; align-items: center;">
+          <div>
+            <strong>Peringatan Keamanan:</strong> Anda masih menggunakan password default (<code>admin123</code>). Demi keamanan database PKKPR, harap segera perbarui kredensial administrator.
+          </div>
+          <button type="button" class="btn btn-mustard btn-sm" onclick="switchView('admin')">Ubah Sekarang</button>
+        </div>
+
+        <!-- ==================================================================
+             VIEW 1: DASHBOARD
+             ================================================================== -->
+        <section id="view-dashboard" class="view-section">
+          <!-- 4 KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card kpi-navy">
+              <div class="kpi-top">
+                <span class="kpi-label">Total Permohonan PKKPR</span>
+                <div class="kpi-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+              </div>
+              <div class="kpi-value" id="kpiTotal">0</div>
+              <div class="kpi-meta">
+                <span>Seluruh berkas terdaftar</span>
+                <span class="badge badge-navy" id="kpiTotalDelta">Bulan ini: 0</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-teal">
+              <div class="kpi-top">
+                <span class="kpi-label">Survey Lapangan</span>
+                <div class="kpi-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+              </div>
+              <div class="kpi-value" id="kpiSurvey">0</div>
+              <div class="kpi-meta">
+                <span>Tahap survey selesai</span>
+                <span class="badge badge-teal" id="kpiSurveyDelta">Bulan ini: 0</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-mustard">
+              <div class="kpi-top">
+                <span class="kpi-label">Rapat Forum</span>
+                <div class="kpi-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+              </div>
+              <div class="kpi-value" id="kpiForum">0</div>
+              <div class="kpi-meta">
+                <span>Forum Penataan Ruang</span>
+                <span class="badge badge-mustard" id="kpiForumDelta">Bulan ini: 0</span>
+              </div>
+            </div>
+
+            <div class="kpi-card kpi-orange">
+              <div class="kpi-top">
+                <span class="kpi-label">Sudah Input</span>
+                <div class="kpi-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </div>
+              <div class="kpi-value" id="kpiInput">0</div>
+              <div class="kpi-meta">
+                <span>Penerbitan &amp; input selesai</span>
+                <span class="badge badge-orange" id="kpiInputDelta">Bulan ini: 0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- In-Process Indicator Strip -->
+          <div class="process-banner">
+            <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+              <span class="badge badge-mustard">STATUS BERJALAN</span>
+              <span>Permohonan Masih Dalam Proses: <strong id="kpiInProcess">0</strong> berkas &bull; Selesai Penuh (9/9 Tahap): <strong id="kpiFullComplete">0</strong> berkas</span>
+            </div>
+            <div class="form-hint">Statistik bulanan &amp; tahunan dihitung berdasarkan <strong>tanggal pertama kali tahapan diselesaikan</strong>.</div>
+          </div>
+
+          <!-- Monthly & Yearly Charts -->
+          <div class="charts-grid">
+            <div class="retro-card">
+              <div class="retro-card-header">
+                <div class="retro-card-title">Statistik Progres Per Bulan</div>
+                <div class="filter-inline">
+                  <select id="dashMonthYearFilter" aria-label="Pilih Tahun Statistik Bulanan"></select>
+                  <select id="dashMonthFilter" aria-label="Pilih Bulan Statistik Bulanan">
+                    <option value="ALL">Semua Bulan (Jan - Des)</option>
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                  </select>
+                </div>
+              </div>
+              <div id="monthlySummaryBadges" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;"></div>
+              <div class="chart-container">
+                <canvas id="monthlyChart"></canvas>
+              </div>
+            </div>
+
+            <div class="retro-card">
+              <div class="retro-card-header">
+                <div class="retro-card-title">Statistik &amp; Perbandingan Per Tahun</div>
+                <div class="filter-inline">
+                  <select id="dashYearSelect" aria-label="Pilih Tahun Utama"></select>
+                </div>
+              </div>
+              <div id="yearlySummaryBadges" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;"></div>
+              <div class="chart-container">
+                <canvas id="yearlyChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9 Stages Funnel / Checklist Chart -->
+          <div class="retro-card">
+            <div class="retro-card-header">
+              <div class="retro-card-title">Statistik 9 Tahapan Checklist Proses PKKPR</div>
+              <span class="badge badge-teal">Akumulasi Tahapan Selesai</span>
+            </div>
+            <div class="chart-container" style="height: 290px;">
+              <canvas id="stagesChart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 2: INPUT DATA (TAMBAH & EDIT FORM)
+             ================================================================== -->
+        <section id="view-input" class="view-section hidden">
+          <div class="retro-card">
+            <div class="retro-card-header">
+              <div class="retro-card-title" id="formCardTitle">Formulir Input Permohonan PKKPR Baru</div>
+              <span class="badge badge-navy" id="formModeBadge">MODE TAMBAH DATA</span>
+            </div>
+
+            <form id="pkkprForm" autocomplete="off">
+              <input type="hidden" id="recordId" value="" />
+              <input type="hidden" id="existingFileId" value="" />
+              <input type="hidden" id="existingFileName" value="" />
+              <input type="hidden" id="existingFileUrl" value="" />
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="displayNumber">Nomor Urut Tampilan</label>
+                  <input type="text" id="displayNumber" class="form-control" readonly value="1" />
+                  <span class="form-hint">Otomatis berurutan (identitas permanen menggunakan UUID internal).</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fieldNama">Nama Pemohon / Perusahaan <span class="req">*</span></label>
+                  <input type="text" id="fieldNama" class="form-control" placeholder="Contoh: PT. Riau Agro Sejahtera / Bpk. Ahmad" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fieldKbli">KBLI <span class="req">*</span></label>
+                  <input type="text" id="fieldKbli" class="form-control" placeholder="Contoh: 10431 - Industri Minyak Mentah Kelapa Sawit" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fieldKontak">Kontak (Telepon / WhatsApp)</label>
+                  <input type="text" id="fieldKontak" class="form-control" placeholder="Contoh: +62 812-7500-XXXX" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fieldAlamat">Alamat Pemohon</label>
+                  <input type="text" id="fieldAlamat" class="form-control" placeholder="Alamat lengkap pemohon / domisili badan usaha" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fieldProyekLokasi">Proyek Lokasi <span class="req">*</span></label>
+                  <input type="text" id="fieldProyekLokasi" class="form-control" placeholder="Nama lokasi, Desa/Kelurahan, Kecamatan di Kab. Kampar" required />
+                </div>
+              </div>
+
+              <!-- 9 Independent Progress Checklists -->
+              <div class="progress-box">
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                  <strong style="font-size:0.95rem;">PROGRESS TAHAPAN PENERBITAN PKKPR (9 CHECKLIST)</strong>
+                  <span class="badge badge-teal" id="formProgressBadge">0 / 9 Tahap (0%)</span>
+                </div>
+                <div class="progress-bar-track">
+                  <div class="progress-bar-fill" id="formProgressBar"></div>
+                </div>
+                <div class="checklist-grid" id="checklistContainer"></div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="fieldTindakLanjut">Tindak Lanjut</label>
+                  <textarea id="fieldTindakLanjut" class="form-control" placeholder="Catat langkah tindak lanjut berikutnya yang harus dilakukan..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="fieldCatatan">Catatan</label>
+                  <textarea id="fieldCatatan" class="form-control" placeholder="Informasi tambahan, kendala lapangan, atau keterangan berkas..."></textarea>
+                </div>
+              </div>
+
+              <!-- Google Drive Upload Section -->
+              <div class="form-group">
+                <label class="form-label" for="fieldFile">Upload Berkas Pendukung ke Google Drive (Opsional)</label>
+                <div class="upload-zone">
+                  <input type="file" id="fieldFile" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.jpg,.jpeg,.png,.zip,.rar,.kml,.kmz" style="max-width:100%;" />
+                  <p class="form-hint" style="margin-top:0.5rem;">
+                    Format diizinkan: PDF, Office (DOCX/XLSX), Gambar (JPG/PNG), Arsip (ZIP/RAR), Spasial (KML/KMZ). Maksimal <strong id="maxUploadLabel">10 MB</strong>. Berkas disimpan privat di folder Google Drive <code>PKKPR_DOCUMENTS</code>.
+                  </p>
+
+                  <div id="selectedFilePreview" class="file-preview-card hidden">
+                    <div>
+                      <strong id="previewFileName">-</strong>
+                      <div class="form-hint" id="previewFileMeta">-</div>
+                    </div>
+                    <div style="display:flex; gap:0.5rem; align-items:center;">
+                      <a id="previewFileLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-sm hidden">Buka di Drive</a>
+                      <button type="button" id="clearFileBtn" class="btn btn-outline btn-sm">Hapus Pilihan</button>
+                    </div>
+                  </div>
+
+                  <div id="uploadProgressWrap" class="upload-progress-wrap hidden">
+                    <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:600;">
+                      <span id="uploadStatusText">Mengunggah berkas ke Google Drive...</span>
+                      <span id="uploadPercentText">0%</span>
+                    </div>
+                    <div class="progress-bar-track" style="height:10px; margin:0.35rem 0 0;">
+                      <div class="progress-bar-fill" id="uploadProgressBar" style="width:0%;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="saveRecordBtn" class="btn btn-primary">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  <span id="saveRecordBtnText">SIMPAN DATA</span>
+                </button>
+                <button type="button" id="resetFormBtn" class="btn btn-mustard">RESET FORMULIR</button>
+                <button type="button" id="cancelFormBtn" class="btn btn-outline">BATAL</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 3: DATA PKKPR (DATABASE TABLE + 4 FILTERS + PAGINATION)
+             ================================================================== -->
+        <section id="view-data" class="view-section hidden">
+          <div class="retro-card">
+            <div class="retro-card-header">
+              <div class="retro-card-title">Database Permohonan PKKPR Kabupaten Kampar</div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="openNewForm()">+ Tambah Permohonan</button>
+            </div>
+
+            <!-- 4-Category Search Filters -->
+            <div class="search-grid">
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="filterNama">1. Cari Nama</label>
+                <input type="text" id="filterNama" class="form-control" placeholder="Ketik nama pemohon / PT..." />
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="filterProgress">2. Filter Progress</label>
+                <select id="filterProgress" class="form-control">
+                  <option value="">Semua Tahapan Progress</option>
+                  <option value="COMPLETE_ALL">Selesai Penuh (9/9 Tahap)</option>
+                  <option value="IN_PROGRESS">Masih Dalam Proses (&lt;9 Tahap)</option>
+                  <option value="bayar">Sudah: Bayar</option>
+                  <option value="pertek_bpn">Sudah: Pertek BPN Terbit</option>
+                  <option value="fikpos">Sudah: FIKPOS</option>
+                  <option value="persiapan_survey">Sudah: Persiapan Survey Lapangan</option>
+                  <option value="survey_lapangan">Sudah: Survey Lapangan</option>
+                  <option value="rapat_forum">Sudah: Rapat Forum</option>
+                  <option value="ba_dan_peta">Sudah: BA dan Peta</option>
+                  <option value="ttd">Sudah: TTD</option>
+                  <option value="input">Sudah: INPUT</option>
+                  <option value="NOT_survey_lapangan">Belum: Survey Lapangan</option>
+                  <option value="NOT_rapat_forum">Belum: Rapat Forum</option>
+                  <option value="NOT_input">Belum: INPUT</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="filterKbli">3. Cari KBLI</label>
+                <input type="text" id="filterKbli" class="form-control" placeholder="Kode atau uraian KBLI..." />
+              </div>
+
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="filterCatatan">4. Cari Catatan</label>
+                <input type="text" id="filterCatatan" class="form-control" placeholder="Kata kunci pada catatan..." />
+              </div>
+            </div>
+
+            <div class="table-toolbar">
+              <div style="display:flex; align-items:center; gap:0.65rem; flex-wrap:wrap;">
+                <button type="button" id="resetFilterBtn" class="btn btn-outline btn-sm">RESET FILTER</button>
+                <span class="badge badge-navy" id="totalDataBadge">Menampilkan 0 dari 0 data</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <label for="pageSizeSelect" class="form-hint">Baris per halaman:</label>
+                <select id="pageSizeSelect" class="form-control" style="width:auto; min-height:34px; padding:0.25rem 0.6rem;">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table class="pkkpr-table" id="pkkprTable">
+                <thead>
+                  <tr>
+                    <th data-sort="no">No &#8597;</th>
+                    <th data-sort="nama">Nama &#8597;</th>
+                    <th data-sort="kbli">KBLI &#8597;</th>
+                    <th data-sort="kontak">Kontak &#8597;</th>
+                    <th data-sort="alamat">Alamat &#8597;</th>
+                    <th data-sort="proyek_lokasi">Proyek Lokasi &#8597;</th>
+                    <th data-sort="progress_count">Progress &#8597;</th>
+                    <th data-sort="tindak_lanjut">Tindak Lanjut</th>
+                    <th data-sort="catatan">Catatan</th>
+                    <th>Berkas</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="pkkprTableBody">
+                  <tr>
+                    <td colspan="11" style="text-align:center; padding:2rem; color:var(--text-muted);">Memuat data dari Google Spreadsheet...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination-bar">
+              <div class="form-hint" id="paginationInfo">Halaman 1 dari 1</div>
+              <div style="display:flex; gap:0.45rem;">
+                <button type="button" id="prevPageBtn" class="btn btn-outline btn-sm">&laquo; Sebelumnya</button>
+                <button type="button" id="nextPageBtn" class="btn btn-outline btn-sm">Berikutnya &raquo;</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 4: EKSPOR DATA (LAPORAN BULANAN & TAHUNAN)
+             ================================================================== -->
+        <section id="view-export" class="view-section hidden">
+          <div class="charts-grid">
+            <!-- Monthly Export Card -->
+            <div class="retro-card">
+              <div class="retro-card-header">
+                <div class="retro-card-title">A. Ekspor Laporan Per Bulan</div>
+                <span class="badge badge-teal">PERIODE BULANAN</span>
+              </div>
+              <p class="form-hint" style="margin-bottom:1rem;">
+                Memisahkan secara jelas antara <strong>Permohonan yang Terdaftar</strong> pada bulan terpilih dengan <strong>Rekapitulasi Penyelesaian Tahapan Progress</strong> (Survey Lapangan, Rapat Forum, dan Sudah Input) berdasarkan tanggal penyelesaian pertama pada bulan tersebut.
+              </p>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="exportMonthYear">Tahun</label>
+                  <select id="exportMonthYear" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="exportMonthSelect">Bulan</label>
+                  <select id="exportMonthSelect" class="form-control">
+                    <option value="1">Januari</option>
+                    <option value="2">Februari</option>
+                    <option value="3">Maret</option>
+                    <option value="4">April</option>
+                    <option value="5">Mei</option>
+                    <option value="6">Juni</option>
+                    <option value="7">Juli</option>
+                    <option value="8">Agustus</option>
+                    <option value="9">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="display:flex; gap:0.65rem; flex-wrap:wrap; margin-top:0.5rem;">
+                <button type="button" class="btn btn-outline" onclick="handleExport('monthly', 'csv')">EXPORT CSV</button>
+                <button type="button" class="btn btn-teal" onclick="handleExport('monthly', 'xlsx')">EXPORT EXCEL (.XLSX)</button>
+                <button type="button" class="btn btn-orange" onclick="handleExport('monthly', 'pdf')">EXPORT PDF</button>
+              </div>
+            </div>
+
+            <!-- Yearly Export Card -->
+            <div class="retro-card">
+              <div class="retro-card-header">
+                <div class="retro-card-title">B. Ekspor Laporan Per Tahun</div>
+                <span class="badge badge-mustard">PERIODE TAHUNAN</span>
+              </div>
+              <p class="form-hint" style="margin-bottom:1rem;">
+                Menghasilkan rekapitulasi lengkap selama 1 tahun penuh meliputi: seluruh permohonan yang masuk pada tahun terpilih, statistik bulanan <strong>Januari sampai Desember</strong>, serta ringkasan penyelesaian tahapan progress tahunan.
+              </p>
+
+              <div class="form-group">
+                <label class="form-label" for="exportYearOnly">Pilih Tahun Laporan</label>
+                <select id="exportYearOnly" class="form-control"></select>
+              </div>
+
+              <div style="display:flex; gap:0.65rem; flex-wrap:wrap; margin-top:0.5rem;">
+                <button type="button" class="btn btn-outline" onclick="handleExport('yearly', 'csv')">EXPORT CSV</button>
+                <button type="button" class="btn btn-teal" onclick="handleExport('yearly', 'xlsx')">EXPORT EXCEL (.XLSX)</button>
+                <button type="button" class="btn btn-orange" onclick="handleExport('yearly', 'pdf')">EXPORT PDF</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Preview of Selected Report -->
+          <div class="retro-card" id="exportPreviewCard">
+            <div class="retro-card-header">
+              <div class="retro-card-title">Pratinjau Ringkasan Laporan Terakhir Dihasilkan</div>
+              <span class="badge badge-navy" id="exportPreviewPeriod">Belum ada pratinjau</span>
+            </div>
+            <div id="exportPreviewContent" class="form-hint">
+              Pilih periode dan klik salah satu tombol ekspor (CSV, Excel, atau PDF) untuk mengunduh laporan dan menampilkan ringkasan statistik di sini.
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             VIEW 5: ADMIN (CREDENTIAL MANAGEMENT)
+             ================================================================== -->
+        <section id="view-admin" class="view-section hidden">
+          <div class="retro-card" style="max-width: 620px;">
+            <div class="retro-card-header">
+              <div class="retro-card-title">Pengelolaan Akun Administrator</div>
+              <span class="badge badge-orange">KEAMANAN SISTEM</span>
+            </div>
+
+            <div class="alert-box alert-warning">
+              <div>
+                Setelah username atau password diperbarui, <strong>seluruh sesi login aktif akan otomatis dihentikan</strong> dan Anda diminta login ulang menggunakan kredensial baru.
+              </div>
+            </div>
+
+            <form id="adminCredentialsForm" autocomplete="off">
+              <div class="form-group">
+                <label class="form-label" for="adminActiveUsername">Username Aktif Saat Ini</label>
+                <input type="text" id="adminActiveUsername" class="form-control" readonly />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="adminCurrentPassword">Password Saat Ini (Wajib Verifikasi) <span class="req">*</span></label>
+                <input type="password" id="adminCurrentPassword" class="form-control" placeholder="Masukkan password saat ini" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="adminNewUsername">Username Baru <span class="req">*</span></label>
+                <input type="text" id="adminNewUsername" class="form-control" placeholder="Minimal 4 karakter (huruf/angka)" minlength="4" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="adminNewPassword">Password Baru <span class="req">*</span></label>
+                <input type="password" id="adminNewPassword" class="form-control" placeholder="Minimal 8 karakter" minlength="8" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="adminConfirmPassword">Konfirmasi Password Baru <span class="req">*</span></label>
+                <input type="password" id="adminConfirmPassword" class="form-control" placeholder="Ketik ulang password baru" minlength="8" required />
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" id="saveAdminBtn" class="btn btn-primary">PERBARUI KREDENSIAL &amp; LOGOUT SEMUA SESI</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <!-- Application Footer -->
+      <footer class="app-footer">
+        <div>Copyright &copy; <span class="current-year"></span> - Aplikasi Status Permohonan PKKPR Kab. Kampar</div>
+        <div>Powered By GoogleAppScript | Secured By Cloudflare | Design By <a href="https://gistariau.com/" target="_blank" rel="noopener noreferrer">GISTARIAU</a></div>
+        <div>Hak Cipta Dilindungi Undang-Undang &bull; Di bawah Naungan PT. GISTARIAU GEOSPASIAL SOLUTION</div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       CUSTOM MODAL (DETAIL VIEW, DELETE CONFIRMATION, MANDATORY PASSWORD CHANGE)
+       ======================================================================== -->
+  <div id="customModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div id="modalDialog" class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Detail Informasi</h2>
+        <button type="button" id="modalCloseBtn" class="modal-close" aria-label="Tutup Modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter"></div>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================================================
+       1. APPLICATION CONFIGURATION & CONSTANTS
+       ======================================================================== */
+    const APP_CONFIG = {
+      API_ENDPOINT: '/api', // Same-origin Cloudflare Pages Function proxy
+      MAX_UPLOAD_MB: 10,    // Default batas unggahan 10 MB (mudah diubah)
+      REQUEST_TIMEOUT_MS: 45000,
+      LOGO_URL: 'https://lh3.googleusercontent.com/a/ACg8ocKwa56EqjiXGTcTzJCjhlvHVD1_cjafyhnuBK5As9X9z1r7tS8J=s360-c-no',
+      BLOCKED_EXTENSIONS: [
+        'exe', 'bat', 'cmd', 'msi', 'sh', 'ps1', 'vbs', 'vbe', 'js', 'jse',
+        'jar', 'scr', 'com', 'pif', 'apk', 'dmg', 'iso', 'dll', 'sys', 'reg'
+      ]
+    };
+
+    const MILESTONES = [
+      { key: 'bayar', label: 'Bayar', step: 'Tahap 01' },
+      { key: 'pertek_bpn', label: 'Pertek BPN Terbit', step: 'Tahap 02' },
+      { key: 'fikpos', label: 'FIKPOS', step: 'Tahap 03' },
+      { key: 'persiapan_survey', label: 'Persiapan Survey Lapangan', step: 'Tahap 04' },
+      { key: 'survey_lapangan', label: 'Survey Lapangan', step: 'Tahap 05' },
+      { key: 'rapat_forum', label: 'Rapat Forum', step: 'Tahap 06' },
+      { key: 'ba_dan_peta', label: 'BA dan Peta', step: 'Tahap 07' },
+      { key: 'ttd', label: 'TTD', step: 'Tahap 08' },
+      { key: 'input', label: 'INPUT', step: 'Tahap 09' }
+    ];
+
+    const MONTH_NAMES_ID = [
+      '', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+
+    /* ========================================================================
+       2. GLOBAL STATE
+       ======================================================================== */
+    const state = {
+      token: sessionStorage.getItem('pkkpr_token') || '',
+      username: sessionStorage.getItem('pkkpr_user') || '',
+      mustChangePassword: sessionStorage.getItem('pkkpr_must_change') === 'true',
+      records: [],
+      filteredRecords: [],
+      stats: null,
+      sortField: 'no',
+      sortAsc: true,
+      currentPage: 1,
+      pageSize: 10,
+      isSubmitting: false,
+      charts: {
+        monthly: null,
+        yearly: null,
+        stages: null
+      }
+    };
+
+    /* ========================================================================
+       3. SECURITY HELPERS & FORMATTERS (INDONESIA / WIB / DD/MM/YYYY)
+       ======================================================================== */
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatNumberID(num) {
+      const n = Number(num) || 0;
+      return new Intl.NumberFormat('id-ID').format(n);
+    }
+
+    function formatDateID(isoString, includeTime = false) {
+      if (!isoString) return '-';
+      const d = new Date(isoString);
+      if (isNaN(d.getTime())) return String(isoString);
+      const parts = new Intl.DateTimeFormat('id-ID', {
+        timeZone: 'Asia/Jakarta',
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        ...(includeTime ? { hour: '2-digit', minute: '2-digit', hour12: false } : {})
+      }).formatToParts(d);
+      const map = {};
+      parts.forEach(p => { map[p.type] = p.value; });
+      const datePart = `${map.day}/${map.month}/${map.year}`;
+      return includeTime ? `${datePart} ${map.hour}:${map.minute} WIB` : datePart;
+    }
+
+    function formatFileSize(bytes) {
+      if (!bytes || bytes <= 0) return '0 KB';
+      if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+      return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+    }
+
+    function showToast(title, message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+
+      const textWrap = document.createElement('div');
+      const titleEl = document.createElement('div');
+      titleEl.className = 'toast-title';
+      titleEl.textContent = title;
+
+      const msgEl = document.createElement('div');
+      msgEl.className = 'toast-msg';
+      msgEl.textContent = message;
+
+      textWrap.appendChild(titleEl);
+      textWrap.appendChild(msgEl);
+
+      const closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.style.cssText = 'background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.1rem;';
+      closeBtn.textContent = '×';
+      closeBtn.onclick = () => toast.remove();
+
+      toast.appendChild(textWrap);
+      toast.appendChild(closeBtn);
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        if (toast.parentNode) toast.remove();
+      }, 5000);
+    }
+
+    function setGlobalLoading(active) {
+      const loader = document.getElementById('globalLoader');
+      if (active) loader.classList.remove('hidden');
+      else loader.classList.add('hidden');
+    }
+
+    /* ========================================================================
+       4. API CLIENT (SAME-ORIGIN CLOUDFLARE PAGES FUNCTION PROXY)
+       ======================================================================== */
+    async function apiRequest(action, payload = {}, requiresAuth = true) {
+      if (!navigator.onLine) {
+        throw new Error('Koneksi internet terputus. Periksa jaringan Anda lalu coba lagi.');
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), APP_CONFIG.REQUEST_TIMEOUT_MS);
+
+      setGlobalLoading(true);
+      try {
+        const body = {
+          action,
+          ...(requiresAuth ? { token: state.token } : {}),
+          ...payload
+        };
+
+        const response = await fetch(APP_CONFIG.API_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(body),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        let result;
+        const rawText = await response.text();
+        try {
+          result = JSON.parse(rawText);
+        } catch (parseErr) {
+          throw new Error('Respons server tidak valid (bukan format JSON). Pastikan GAS_WEB_APP_URL telah dikonfigurasi.');
+        }
+
+        if (result && result.code === 'UNAUTHORIZED') {
+          handleSessionExpired(result.message || 'Sesi telah berakhir. Silakan login kembali.');
+          throw new Error(result.message || 'Sesi tidak valid.');
+        }
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || result.error || `Permintaan gagal (HTTP ${response.status}).`);
+        }
+
+        return result;
+      } catch (err) {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          throw new Error('Waktu koneksi ke server habis (timeout). Silakan coba beberapa saat lagi.');
+        }
+        throw err;
+      } finally {
+        setGlobalLoading(false);
+      }
+    }
+
+    /* ========================================================================
+       5. THEME MANAGEMENT (LIGHT / DARK MODE)
+       ======================================================================== */
+    function initTheme() {
+      const savedTheme = localStorage.getItem('pkkpr_theme') || 'light';
+      applyTheme(savedTheme);
+
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('pkkpr_theme', next);
+        applyTheme(next);
+        if (state.stats) renderAllCharts();
+      });
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if (theme === 'dark') {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+    }
+
+    /* ========================================================================
+       6. AUTHENTICATION, SESSION & FIRST-LOGIN DEFAULT PASSWORD CHECK
+       ======================================================================== */
+    function handleSessionExpired(message) {
+      state.token = '';
+      state.username = '';
+      state.mustChangePassword = false;
+      sessionStorage.removeItem('pkkpr_token');
+      sessionStorage.removeItem('pkkpr_user');
+      sessionStorage.removeItem('pkkpr_must_change');
+      showLoginScreen();
+      showToast('Sesi Berakhir', message, 'warning');
+    }
+
+    function showLoginScreen() {
+      document.getElementById('appShell').classList.add('hidden');
+      document.getElementById('loginView').classList.remove('hidden');
+      document.getElementById('loginPassword').value = '';
+    }
+
+    function showAppShell() {
+      document.getElementById('loginView').classList.add('hidden');
+      document.getElementById('appShell').classList.remove('hidden');
+
+      document.getElementById('sidebarUsername').textContent = state.username || 'admin';
+      document.getElementById('sidebarUserInitial').textContent = (state.username || 'A').charAt(0).toUpperCase();
+      document.getElementById('adminActiveUsername').value = state.username || 'admin';
+
+      const banner = document.getElementById('defaultPassBanner');
+      if (state.mustChangePassword) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (state.isSubmitting) return;
+
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const errBox = document.getElementById('loginErrorBox');
+      const errText = document.getElementById('loginErrorText');
+      const btn = document.getElementById('loginSubmitBtn');
+
+      errBox.classList.add('hidden');
+      if (!username || !password) {
+        errText.textContent = 'Username dan password wajib diisi.';
+        errBox.classList.remove('hidden');
+        return;
+      }
+
+      state.isSubmitting = true;
+      btn.disabled = true;
+
+      try {
+        const res = await apiRequest('login', { username, password }, false);
+        state.token = res.data.token;
+        state.username = res.data.username;
+        state.mustChangePassword = Boolean(res.data.mustChangePassword);
+
+        sessionStorage.setItem('pkkpr_token', state.token);
+        sessionStorage.setItem('pkkpr_user', state.username);
+        sessionStorage.setItem('pkkpr_must_change', String(state.mustChangePassword));
+
+        showAppShell();
+        showToast('Login Berhasil', `Selamat datang, ${state.username}.`, 'success');
+
+        await loadAllData();
+
+        if (state.mustChangePassword) {
+          promptMandatoryPasswordChange();
+        }
+      } catch (err) {
+        errText.textContent = err.message || 'Login gagal. Periksa kembali kredensial Anda.';
+        errBox.classList.remove('hidden');
+      } finally {
+        state.isSubmitting = false;
+        btn.disabled = false;
+      }
+    });
+
+    function promptMandatoryPasswordChange() {
+      openModal(
+        'Keamanan Akun: Wajib Ganti Password Default',
+        `<div class="alert-box alert-warning" style="margin-bottom:0.75rem;">
+          <div>Anda masuk menggunakan kredensial default (<strong>admin / admin123</strong>). Sesuai standar keamanan sistem administrasi PKKPR, Anda wajib mengganti password default sekarang.</div>
+        </div>
+        <p class="form-hint">Klik tombol di bawah ini untuk membuka menu Admin dan memperbarui username serta password Anda.</p>`,
+        `<button type="button" class="btn btn-primary" onclick="closeModal(); switchView('admin');">Ke Menu Admin Sekarang</button>`,
+        true
+      );
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      try {
+        if (state.token) {
+          await apiRequest('logout', {}, true);
+        }
+      } catch (_) {
+        // Tetap lanjutkan pembersihan sisi client meskipun jaringan terganggu
+      } finally {
+        state.token = '';
+        state.username = '';
+        state.mustChangePassword = false;
+        sessionStorage.clear();
+        closeSidebarMobile();
+        showLoginScreen();
+        showToast('Logout Berhasil', 'Sesi Anda telah diakhiri dengan aman.', 'info');
+      }
+    });
+
+    /* ========================================================================
+       7. NAVIGATION & RESPONSIVE SIDEBAR
+       ======================================================================== */
+    const VIEW_TITLES = {
+      dashboard: 'Dashboard Pemantauan PKKPR',
+      input: 'Input Data Permohonan PKKPR',
+      data: 'Database Permohonan PKKPR',
+      export: 'Ekspor Laporan Bulanan & Tahunan',
+      admin: 'Pengaturan Akun Administrator'
+    };
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-view') === viewName);
+      });
+
+      document.getElementById('pageHeaderTitle').textContent = VIEW_TITLES[viewName] || 'PKKPR Kab. Kampar';
+      closeSidebarMobile();
+
+      if (viewName === 'dashboard' && state.stats) {
+        renderAllCharts();
+      }
+    }
+
+    function closeSidebarMobile() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarBackdrop').classList.remove('open');
+    }
+
+    document.querySelectorAll('.nav-item[data-view]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view');
+        if (view === 'input' && !document.getElementById('recordId').value) {
+          resetPkkprForm(false);
+        }
+        switchView(view);
+      });
+    });
+
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('sidebarBackdrop').classList.toggle('open');
+    });
+
+    document.getElementById('sidebarBackdrop').addEventListener('click', closeSidebarMobile);
+
+    document.getElementById('refreshAllBtn').addEventListener('click', async () => {
+      await loadAllData();
+      showToast('Data Tersinkron', 'Data terbaru dari Google Spreadsheet berhasil dimuat.', 'success');
+    });
+
+    /* ========================================================================
+       8. LOAD DATA & SYNCHRONIZE DASHBOARD + TABLE
+       ======================================================================== */
+    async function loadAllData() {
+      try {
+        const [recordsRes, statsRes] = await Promise.all([
+          apiRequest('getRecords', {}, true),
+          apiRequest('getDashboardStatistics', {}, true)
+        ]);
+
+        state.records = Array.isArray(recordsRes.data) ? recordsRes.data : [];
+        state.stats = statsRes.data || null;
+
+        populateYearDropdowns();
+        applyTableFilters();
+        renderDashboard();
+        updateNextAutoNumber();
+      } catch (err) {
+        showToast('Gagal Memuat Data', err.message, 'error');
+      }
+    }
+
+    function updateNextAutoNumber() {
+      if (!document.getElementById('recordId').value) {
+        document.getElementById('displayNumber').value = String(state.records.length + 1);
+      }
+    }
+
+    function populateYearDropdowns() {
+      const currentYear = new Date().getFullYear();
+      const yearsSet = new Set([currentYear, currentYear - 1]);
+      if (state.stats && Array.isArray(state.stats.availableYears)) {
+        state.stats.availableYears.forEach(y => yearsSet.add(Number(y)));
+      }
+      const years = Array.from(yearsSet).sort((a, b) => b - a);
+
+      const selectIds = ['dashMonthYearFilter', 'dashYearSelect', 'exportMonthYear', 'exportYearOnly'];
+      selectIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const prevVal = el.value;
+        el.innerHTML = years.map(y => `<option value="${y}">${y}</option>`).join('');
+        if (prevVal && years.includes(Number(prevVal))) {
+          el.value = prevVal;
+        } else {
+          el.value = String(currentYear);
+        }
+      });
+
+      const exportMonthEl = document.getElementById('exportMonthSelect');
+      if (exportMonthEl && !exportMonthEl.dataset.initialized) {
+        exportMonthEl.value = String(new Date().getMonth() + 1);
+        exportMonthEl.dataset.initialized = 'true';
+      }
+    }
+
+    /* ========================================================================
+       9. DASHBOARD KPI & INTERACTIVE CHART.JS RENDERING
+       ======================================================================== */
+    function renderDashboard() {
+      if (!state.stats) return;
+      const s = state.stats;
+
+      document.getElementById('kpiTotal').textContent = formatNumberID(s.totals.totalPermohonan);
+      document.getElementById('kpiSurvey').textContent = formatNumberID(s.totals.surveyLapangan);
+      document.getElementById('kpiForum').textContent = formatNumberID(s.totals.rapatForum);
+      document.getElementById('kpiInput').textContent = formatNumberID(s.totals.sudahInput);
+
+      document.getElementById('kpiInProcess').textContent = formatNumberID(s.totals.dalamProses);
+      document.getElementById('kpiFullComplete').textContent = formatNumberID(s.totals.selesaiPenuh);
+
+      const comp = s.monthComparison || {};
+      document.getElementById('kpiTotalDelta').textContent =
+        `Bln ini: +${comp.currentRegistrations || 0} (Bln lalu: +${comp.prevRegistrations || 0})`;
+      document.getElementById('kpiSurveyDelta').textContent =
+        `Bln ini: +${comp.currentSurvey || 0} (Bln lalu: +${comp.prevSurvey || 0})`;
+      document.getElementById('kpiForumDelta').textContent =
+        `Bln ini: +${comp.currentForum || 0} (Bln lalu: +${comp.prevForum || 0})`;
+      document.getElementById('kpiInputDelta').textContent =
+        `Bln ini: +${comp.currentInput || 0} (Bln lalu: +${comp.prevInput || 0})`;
+
+      renderAllCharts();
+    }
+
+    function getChartColors() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return {
+        text: isDark ? '#E2E8F0' : '#1B2430',
+        grid: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(22, 43, 73, 0.08)',
+        navy: isDark ? '#4A7AC2' : '#162B49',
+        teal: '#1E6B7B',
+        mustard: '#D99B26',
+        orange: '#C85A32'
+      };
+    }
+
+    function renderAllCharts() {
+      if (!state.stats) return;
+      renderMonthlyChart();
+      renderYearlyChart();
+      renderStagesChart();
+    }
+
+    function renderMonthlyChart() {
+      const year = String(document.getElementById('dashMonthYearFilter').value || new Date().getFullYear());
+      const monthFilter = document.getElementById('dashMonthFilter').value;
+      const yearData = (state.stats.monthlyByYear && state.stats.monthlyByYear[year]) || Array.from({ length: 12 }, (_, i) => ({
+        month: i + 1, survey_lapangan: 0, rapat_forum: 0, input: 0
+      }));
+
+      const colors = getChartColors();
+      const ctx = document.getElementById('monthlyChart').getContext('2d');
+      if (state.charts.monthly) state.charts.monthly.destroy();
+
+      let labels = [];
+      let surveySeries = [];
+      let forumSeries = [];
+      let inputSeries = [];
+
+      if (monthFilter === 'ALL') {
+        labels = yearData.map(m => MONTH_NAMES_ID[m.month].substring(0, 3));
+        surveySeries = yearData.map(m => m.survey_lapangan);
+        forumSeries = yearData.map(m => m.rapat_forum);
+        inputSeries = yearData.map(m => m.input);
+
+        const sumS = surveySeries.reduce((a, b) => a + b, 0);
+        const sumF = forumSeries.reduce((a, b) => a + b, 0);
+        const sumI = inputSeries.reduce((a, b) => a + b, 0);
+        document.getElementById('monthlySummaryBadges').innerHTML = `
+          <span class="badge badge-teal">Survey (${year}): ${sumS}</span>
+          <span class="badge badge-mustard">Rapat Forum (${year}): ${sumF}</span>
+          <span class="badge badge-orange">Sudah Input (${year}): ${sumI}</span>
+        `;
+      } else {
+        const mIdx = Number(monthFilter) - 1;
+        const selected = yearData[mIdx] || { survey_lapangan: 0, rapat_forum: 0, input: 0 };
+        const prev = mIdx > 0 ? yearData[mIdx - 1] : { survey_lapangan: 0, rapat_forum: 0, input: 0 };
+        const prevLabel = mIdx > 0 ? `${MONTH_NAMES_ID[mIdx]} ${year}` : 'Bulan Sebelumnya';
+        const curLabel = `${MONTH_NAMES_ID[mIdx + 1]} ${year}`;
+
+        labels = [prevLabel, curLabel];
+        surveySeries = [prev.survey_lapangan, selected.survey_lapangan];
+        forumSeries = [prev.rapat_forum, selected.rapat_forum];
+        inputSeries = [prev.input, selected.input];
+
+        document.getElementById('monthlySummaryBadges').innerHTML = `
+          <span class="badge badge-teal">${curLabel} - Survey: ${selected.survey_lapangan}</span>
+          <span class="badge badge-mustard">Rapat Forum: ${selected.rapat_forum}</span>
+          <span class="badge badge-orange">Sudah Input: ${selected.input}</span>
+        `;
+      }
+
+      state.charts.monthly = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            { label: 'Survey Lapangan', data: surveySeries, backgroundColor: colors.teal, borderRadius: 4 },
+            { label: 'Rapat Forum', data: forumSeries, backgroundColor: colors.mustard, borderRadius: 4 },
+            { label: 'Sudah Input', data: inputSeries, backgroundColor: colors.orange, borderRadius: 4 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: colors.text, font: { weight: '600' } } }
+          },
+          scales: {
+            x: { ticks: { color: colors.text }, grid: { display: false } },
+            y: { beginAtZero: true, ticks: { color: colors.text, precision: 0 }, grid: { color: colors.grid } }
+          }
+        }
+      });
+    }
+
+    function renderYearlyChart() {
+      const selectedYear = String(document.getElementById('dashYearSelect').value || new Date().getFullYear());
+      const yearlyMap = state.stats.yearlySummary || {};
+      const years = Object.keys(yearlyMap).sort();
+
+      const ySelected = yearlyMap[selectedYear] || { survey_lapangan: 0, rapat_forum: 0, input: 0 };
+      document.getElementById('yearlySummaryBadges').innerHTML = `
+        <span class="badge badge-teal">Survey ${selectedYear}: ${ySelected.survey_lapangan}</span>
+        <span class="badge badge-mustard">Rapat Forum ${selectedYear}: ${ySelected.rapat_forum}</span>
+        <span class="badge badge-orange">Sudah Input ${selectedYear}: ${ySelected.input}</span>
+      `;
+
+      const colors = getChartColors();
+      const ctx = document.getElementById('yearlyChart').getContext('2d');
+      if (state.charts.yearly) state.charts.yearly.destroy();
+
+      state.charts.yearly = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years.length ? years : [selectedYear],
+          datasets: [
+            {
+              label: 'Total Survey Lapangan',
+              data: years.length ? years.map(y => yearlyMap[y].survey_lapangan) : [0],
+              backgroundColor: colors.teal,
+              borderRadius: 4
+            },
+            {
+              label: 'Total Rapat Forum',
+              data: years.length ? years.map(y => yearlyMap[y].rapat_forum) : [0],
+              backgroundColor: colors.mustard,
+              borderRadius: 4
+            },
+            {
+              label: 'Total Sudah Input',
+              data: years.length ? years.map(y => yearlyMap[y].input) : [0],
+              backgroundColor: colors.orange,
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: colors.text, font: { weight: '600' } } }
+          },
+          scales: {
+            x: { ticks: { color: colors.text }, grid: { display: false } },
+            y: { beginAtZero: true, ticks: { color: colors.text, precision: 0 }, grid: { color: colors.grid } }
+          }
+        }
+      });
+    }
+
+    function renderStagesChart() {
+      const stageCounts = state.stats.stageCounts || {};
+      const labels = MILESTONES.map(m => m.label);
+      const values = MILESTONES.map(m => stageCounts[m.key] || 0);
+      const colors = getChartColors();
+
+      const ctx = document.getElementById('stagesChart').getContext('2d');
+      if (state.charts.stages) state.charts.stages.destroy();
+
+      state.charts.stages = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Jumlah Permohonan Selesai Tahap Ini',
+            data: values,
+            backgroundColor: [
+              '#162B49', '#1B4965', '#1E6B7B', '#2A8C9E',
+              '#D99B26', '#E08E26', '#D46A2E', '#C85A32', '#227A53'
+            ],
+            borderRadius: 5
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false }
+          },
+          scales: {
+            x: { beginAtZero: true, ticks: { color: colors.text, precision: 0 }, grid: { color: colors.grid } },
+            y: { ticks: { color: colors.text, font: { weight: '600' } }, grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    document.getElementById('dashMonthYearFilter').addEventListener('change', renderMonthlyChart);
+    document.getElementById('dashMonthFilter').addEventListener('change', renderMonthlyChart);
+    document.getElementById('dashYearSelect').addEventListener('change', renderYearlyChart);
+
+    /* ========================================================================
+       10. INPUT / EDIT FORM & 9 CHECKLIST LOGIC + GOOGLE DRIVE UPLOAD
+       ======================================================================== */
+    function initChecklistUI() {
+      const container = document.getElementById('checklistContainer');
+      container.innerHTML = MILESTONES.map(m => `
+        <label class="check-item" id="checkLabel_${m.key}">
+          <input type="checkbox" id="chk_${m.key}" data-milestone="${m.key}" />
+          <div class="check-item-text">
+            <span class="check-item-title">${escapeHtml(m.label)}</span>
+            <span class="check-item-step">${escapeHtml(m.step)}</span>
+          </div>
+        </label>
+      `).join('');
+
+      container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const parent = cb.closest('.check-item');
+          parent.classList.toggle('checked', cb.checked);
+          updateFormProgressVisual();
+        });
+      });
+    }
+
+    function updateFormProgressVisual() {
+      let checkedCount = 0;
+      MILESTONES.forEach(m => {
+        const cb = document.getElementById(`chk_${m.key}`);
+        if (cb && cb.checked) checkedCount++;
+      });
+      const pct = Math.round((checkedCount / MILESTONES.length) * 100);
+      document.getElementById('formProgressBadge').textContent = `${checkedCount} / ${MILESTONES.length} Tahap (${pct}%)`;
+      document.getElementById('formProgressBar').style.width = `${pct}%`;
+    }
+
+    function openNewForm() {
+      resetPkkprForm(false);
+      switchView('input');
+    }
+
+    function openEditForm(id) {
+      const rec = state.records.find(r => r.id === id);
+      if (!rec) {
+        showToast('Data Tidak Ditemukan', 'Permohonan tidak ditemukan pada database.', 'error');
+        return;
+      }
+
+      const idx = state.records.findIndex(r => r.id === id);
+      document.getElementById('recordId').value = rec.id;
+      document.getElementById('displayNumber').value = String(idx + 1);
+      document.getElementById('fieldNama').value = rec.nama || '';
+      document.getElementById('fieldKbli').value = rec.kbli || '';
+      document.getElementById('fieldKontak').value = rec.kontak || '';
+      document.getElementById('fieldAlamat').value = rec.alamat || '';
+      document.getElementById('fieldProyekLokasi').value = rec.proyek_lokasi || '';
+      document.getElementById('fieldTindakLanjut').value = rec.tindak_lanjut || '';
+      document.getElementById('fieldCatatan').value = rec.catatan || '';
+
+      MILESTONES.forEach(m => {
+        const cb = document.getElementById(`chk_${m.key}`);
+        const val = Boolean(rec[m.key]);
+        cb.checked = val;
+        cb.closest('.check-item').classList.toggle('checked', val);
+      });
+      updateFormProgressVisual();
+
+      // Existing Drive File Metadata
+      document.getElementById('fieldFile').value = '';
+      document.getElementById('existingFileId').value = rec.file_id || '';
+      document.getElementById('existingFileName').value = rec.file_name || '';
+      document.getElementById('existingFileUrl').value = rec.file_url || '';
+
+      const preview = document.getElementById('selectedFilePreview');
+      const linkEl = document.getElementById('previewFileLink');
+      if (rec.file_name && rec.file_url) {
+        document.getElementById('previewFileName').textContent = rec.file_name;
+        document.getElementById('previewFileMeta').textContent = 'Berkas tersimpan di Google Drive (pilih file baru jika ingin mengganti)';
+        linkEl.href = rec.file_url;
+        linkEl.classList.remove('hidden');
+        preview.classList.remove('hidden');
+      } else {
+        preview.classList.add('hidden');
+        linkEl.classList.add('hidden');
+      }
+
+      document.getElementById('formCardTitle').textContent = `Edit Permohonan PKKPR — ${rec.nama}`;
+      document.getElementById('formModeBadge').textContent = 'MODE EDIT DATA';
+      document.getElementById('formModeBadge').className = 'badge badge-mustard';
+      document.getElementById('saveRecordBtnText').textContent = 'SIMPAN PERUBAHAN';
+
+      switchView('input');
+    }
+
+    function resetPkkprForm(keepEditId = false) {
+      const currentId = keepEditId ? document.getElementById('recordId').value : '';
+      document.getElementById('pkkprForm').reset();
+
+      if (!keepEditId) {
+        document.getElementById('recordId').value = '';
+        document.getElementById('existingFileId').value = '';
+        document.getElementById('existingFileName').value = '';
+        document.getElementById('existingFileUrl').value = '';
+        document.getElementById('displayNumber').value = String(state.records.length + 1);
+        document.getElementById('formCardTitle').textContent = 'Formulir Input Permohonan PKKPR Baru';
+        document.getElementById('formModeBadge').textContent = 'MODE TAMBAH DATA';
+        document.getElementById('formModeBadge').className = 'badge badge-navy';
+        document.getElementById('saveRecordBtnText').textContent = 'SIMPAN DATA';
+      } else {
+        document.getElementById('recordId').value = currentId;
+      }
+
+      MILESTONES.forEach(m => {
+        const cb = document.getElementById(`chk_${m.key}`);
+        cb.checked = false;
+        cb.closest('.check-item').classList.remove('checked');
+      });
+      updateFormProgressVisual();
+
+      document.getElementById('selectedFilePreview').classList.add('hidden');
+      document.getElementById('previewFileLink').classList.add('hidden');
+      document.getElementById('uploadProgressWrap').classList.add('hidden');
+    }
+
+    // File Validation & Preview
+    document.getElementById('fieldFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      const preview = document.getElementById('selectedFilePreview');
+      const linkEl = document.getElementById('previewFileLink');
+
+      if (!file) {
+        if (!document.getElementById('existingFileName').value) {
+          preview.classList.add('hidden');
+        }
+        return;
+      }
+
+      const ext = (file.name.split('.').pop() || '').toLowerCase();
+      if (APP_CONFIG.BLOCKED_EXTENSIONS.includes(ext)) {
+        showToast('Tipe Berkas Ditolak', `Ekstensi .${ext} tidak diizinkan demi keamanan sistem.`, 'error');
+        e.target.value = '';
+        return;
+      }
+
+      const maxBytes = APP_CONFIG.MAX_UPLOAD_MB * 1024 * 1024;
+      if (file.size > maxBytes) {
+        showToast('Ukuran Berkas Melebihi Batas', `Ukuran maksimal unggahan adalah ${APP_CONFIG.MAX_UPLOAD_MB} MB.`, 'error');
+        e.target.value = '';
+        return;
+      }
+
+      document.getElementById('previewFileName').textContent = file.name;
+      document.getElementById('previewFileMeta').textContent = `Ukuran: ${formatFileSize(file.size)} • Siap diunggah ke Google Drive`;
+      linkEl.classList.add('hidden');
+      preview.classList.remove('hidden');
+    });
+
+    document.getElementById('clearFileBtn').addEventListener('click', () => {
+      document.getElementById('fieldFile').value = '';
+      document.getElementById('existingFileId').value = '';
+      document.getElementById('existingFileName').value = '';
+      document.getElementById('existingFileUrl').value = '';
+      document.getElementById('selectedFilePreview').classList.add('hidden');
+      document.getElementById('previewFileLink').classList.add('hidden');
+    });
+
+    document.getElementById('resetFormBtn').addEventListener('click', () => {
+      resetPkkprForm(false);
+      showToast('Formulir Direset', 'Semua kolom formulir telah dikosongkan.', 'info');
+    });
+
+    document.getElementById('cancelFormBtn').addEventListener('click', () => {
+      resetPkkprForm(false);
+      switchView('data');
+    });
+
+    function readFileAsBase64(file, onProgress) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onprogress = (evt) => {
+          if (evt.lengthComputable && typeof onProgress === 'function') {
+            const pct = Math.min(65, Math.round((evt.loaded / evt.total) * 65));
+            onProgress(pct);
+          }
+        };
+        reader.onload = () => {
+          const result = String(reader.result || '');
+          const base64 = result.includes(',') ? result.split(',')[1] : result;
+          resolve(base64);
+        };
+        reader.onerror = () => reject(new Error('Gagal membaca berkas dari perangkat Anda.'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadAttachmentIfPresent() {
+      const fileInput = document.getElementById('fieldFile');
+      const file = fileInput.files[0];
+
+      if (!file) {
+        return {
+          file_id: document.getElementById('existingFileId').value || '',
+          file_name: document.getElementById('existingFileName').value || '',
+          file_url: document.getElementById('existingFileUrl').value || ''
+        };
+      }
+
+      const wrap = document.getElementById('uploadProgressWrap');
+      const bar = document.getElementById('uploadProgressBar');
+      const statusText = document.getElementById('uploadStatusText');
+      const pctText = document.getElementById('uploadPercentText');
+
+      wrap.classList.remove('hidden');
+      bar.style.width = '10%';
+      pctText.textContent = '10%';
+      statusText.textContent = 'Mempersiapkan berkas untuk unggahan...';
+
+      const base64Data = await readFileAsBase64(file, (pct) => {
+        bar.style.width = `${pct}%`;
+        pctText.textContent = `${pct}%`;
+      });
+
+      bar.style.width = '75%';
+      pctText.textContent = '75%';
+      statusText.textContent = 'Menyimpan berkas ke folder Google Drive (PKKPR_DOCUMENTS)...';
+
+      const uploadRes = await apiRequest('uploadFile', {
+        fileName: file.name,
+        mimeType: file.type || 'application/octet-stream',
+        fileSize: file.size,
+        base64Data
+      }, true);
+
+      bar.style.width = '100%';
+      pctText.textContent = '100%';
+      statusText.textContent = 'Berkas berhasil diunggah ke Google Drive!';
+
+      return {
+        file_id: uploadRes.data.file_id,
+        file_name: uploadRes.data.file_name,
+        file_url: uploadRes.data.file_url
+      };
+    }
+
+    document.getElementById('pkkprForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (state.isSubmitting) return;
+
+      const nama = document.getElementById('fieldNama').value.trim();
+      const kbli = document.getElementById('fieldKbli').value.trim();
+      const proyekLokasi = document.getElementById('fieldProyekLokasi').value.trim();
+
+      if (!nama || !kbli || !proyekLokasi) {
+        showToast('Validasi Gagal', 'Nama, KBLI, dan Proyek Lokasi wajib diisi.', 'warning');
+        return;
+      }
+
+      const saveBtn = document.getElementById('saveRecordBtn');
+      state.isSubmitting = true;
+      saveBtn.disabled = true;
+
+      try {
+        const driveInfo = await uploadAttachmentIfPresent();
+
+        const recordPayload = {
+          id: document.getElementById('recordId').value || undefined,
+          nama,
+          kbli,
+          kontak: document.getElementById('fieldKontak').value.trim(),
+          alamat: document.getElementById('fieldAlamat').value.trim(),
+          proyek_lokasi: proyekLokasi,
+          tindak_lanjut: document.getElementById('fieldTindakLanjut').value.trim(),
+          catatan: document.getElementById('fieldCatatan').value.trim(),
+          file_id: driveInfo.file_id,
+          file_name: driveInfo.file_name,
+          file_url: driveInfo.file_url
+        };
+
+        MILESTONES.forEach(m => {
+          recordPayload[m.key] = document.getElementById(`chk_${m.key}`).checked;
+        });
+
+        const isEdit = Boolean(recordPayload.id);
+        const actionName = isEdit ? 'updateRecord' : 'addRecord';
+        const res = await apiRequest(actionName, { record: recordPayload }, true);
+
+        showToast(
+          isEdit ? 'Perubahan Disimpan' : 'Data Berhasil Ditambahkan',
+          res.message || 'Data PKKPR telah diperbarui di Google Spreadsheet.',
+          'success'
+        );
+
+        resetPkkprForm(false);
+        await loadAllData();
+        switchView('data');
+      } catch (err) {
+        showToast('Gagal Menyimpan Data', err.message, 'error');
+      } finally {
+        state.isSubmitting = false;
+        saveBtn.disabled = false;
+      }
+    });
+
+    /* ========================================================================
+       11. DATA PKKPR TABLE: 4-CATEGORY FILTERING, SORTING, PAGINATION, CRUD
+       ======================================================================== */
+    function computeProgressCount(rec) {
+      let c = 0;
+      MILESTONES.forEach(m => { if (rec[m.key]) c++; });
+      return c;
+    }
+
+    function applyTableFilters() {
+      const qNama = document.getElementById('filterNama').value.trim().toLowerCase();
+      const qProg = document.getElementById('filterProgress').value;
+      const qKbli = document.getElementById('filterKbli').value.trim().toLowerCase();
+      const qCatatan = document.getElementById('filterCatatan').value.trim().toLowerCase();
+
+      let list = state.records.map((rec, idx) => ({
+        ...rec,
+        _baseNo: idx + 1,
+        progress_count: computeProgressCount(rec)
+      }));
+
+      if (qNama) {
+        list = list.filter(r => String(r.nama || '').toLowerCase().includes(qNama));
+      }
+      if (qKbli) {
+        list = list.filter(r => String(r.kbli || '').toLowerCase().includes(qKbli));
+      }
+      if (qCatatan) {
+        list = list.filter(r => String(r.catatan || '').toLowerCase().includes(qCatatan));
+      }
+      if (qProg) {
+        if (qProg === 'COMPLETE_ALL') {
+          list = list.filter(r => r.progress_count === MILESTONES.length);
+        } else if (qProg === 'IN_PROGRESS') {
+          list = list.filter(r => r.progress_count < MILESTONES.length);
+        } else if (qProg.startsWith('NOT_')) {
+          const key = qProg.replace('NOT_', '');
+          list = list.filter(r => !r[key]);
+        } else {
+          list = list.filter(r => Boolean(r[qProg]));
+        }
+      }
+
+      // Sorting
+      list.sort((a, b) => {
+        let valA, valB;
+        if (state.sortField === 'no') {
+          valA = a._baseNo;
+          valB = b._baseNo;
+        } else if (state.sortField === 'progress_count') {
+          valA = a.progress_count;
+          valB = b.progress_count;
+        } else {
+          valA = String(a[state.sortField] || '').toLowerCase();
+          valB = String(b[state.sortField] || '').toLowerCase();
+        }
+        if (valA < valB) return state.sortAsc ? -1 : 1;
+        if (valA > valB) return state.sortAsc ? 1 : -1;
+        return 0;
+      });
+
+      state.filteredRecords = list;
+      state.currentPage = 1;
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('pkkprTableBody');
+      const totalAll = state.records.length;
+      const totalFiltered = state.filteredRecords.length;
+      const totalPages = Math.max(1, Math.ceil(totalFiltered / state.pageSize));
+      if (state.currentPage > totalPages) state.currentPage = totalPages;
+
+      document.getElementById('totalDataBadge').textContent =
+        `Menampilkan ${formatNumberID(totalFiltered)} dari ${formatNumberID(totalAll)} data`;
+      document.getElementById('paginationInfo').textContent =
+        `Halaman ${state.currentPage} dari ${totalPages}`;
+
+      document.getElementById('prevPageBtn').disabled = state.currentPage <= 1;
+      document.getElementById('nextPageBtn').disabled = state.currentPage >= totalPages;
+
+      if (totalFiltered === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="11" style="text-align:center; padding:2.2rem; color:var(--text-muted);">
+              ${totalAll === 0
+                ? 'Belum ada data permohonan PKKPR tersimpan. Silakan klik "+ Tambah Permohonan".'
+                : 'Tidak ada data yang cocok dengan kriteria pencarian saat ini.'}
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      const startIdx = (state.currentPage - 1) * state.pageSize;
+      const pageItems = state.filteredRecords.slice(startIdx, startIdx + state.pageSize);
+
+      tbody.innerHTML = pageItems.map((rec, idx) => {
+        const rowNo = startIdx + idx + 1;
+        const pct = Math.round((rec.progress_count / MILESTONES.length) * 100);
+        const badgeClass = rec.progress_count === 9
+          ? 'badge-success'
+          : (rec.progress_count >= 5 ? 'badge-teal' : 'badge-mustard');
+
+        const fileHtml = (rec.file_url && rec.file_name)
+          ? `<a href="${escapeHtml(rec.file_url)}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="${escapeHtml(rec.file_name)}">Berkas</a>`
+          : `<span class="form-hint">-</span>`;
+
+        return `
+          <tr>
+            <td data-label="No"><strong>${rowNo}</strong></td>
+            <td data-label="Nama">
+              <strong>${escapeHtml(rec.nama)}</strong>
+              <div class="form-hint" style="font-size:0.72rem;">Input: ${formatDateID(rec.created_at)}</div>
+            </td>
+            <td data-label="KBLI"><span class="badge badge-navy">${escapeHtml(rec.kbli)}</span></td>
+            <td data-label="Kontak">${escapeHtml(rec.kontak || '-')}</td>
+            <td data-label="Alamat"><div class="cell-truncate" title="${escapeHtml(rec.alamat)}">${escapeHtml(rec.alamat || '-')}</div></td>
+            <td data-label="Proyek Lokasi"><div class="cell-truncate" title="${escapeHtml(rec.proyek_lokasi)}">${escapeHtml(rec.proyek_lokasi)}</div></td>
+            <td data-label="Progress">
+              <div>
+                <span class="badge ${badgeClass}">${rec.progress_count}/9 (${pct}%)</span>
+                <div class="mini-progress-bar">
+                  <div class="mini-progress-fill" style="width:${pct}%"></div>
+                </div>
+              </div>
+            </td>
+            <td data-label="Tindak Lanjut"><div class="cell-truncate" title="${escapeHtml(rec.tindak_lanjut)}">${escapeHtml(rec.tindak_lanjut || '-')}</div></td>
+            <td data-label="Catatan"><div class="cell-truncate" title="${escapeHtml(rec.catatan)}">${escapeHtml(rec.catatan || '-')}</div></td>
+            <td data-label="Berkas">${fileHtml}</td>
+            <td data-label="Aksi">
+              <div class="action-btns">
+                <button type="button" class="btn btn-teal btn-sm" onclick="viewRecordDetail('${escapeHtml(rec.id)}')">LIHAT</button>
+                <button type="button" class="btn btn-mustard btn-sm" onclick="openEditForm('${escapeHtml(rec.id)}')">EDIT</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteRecord('${escapeHtml(rec.id)}')">HAPUS</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    ['filterNama', 'filterKbli', 'filterCatatan'].forEach(id => {
+      document.getElementById(id).addEventListener('input', applyTableFilters);
+    });
+    document.getElementById('filterProgress').addEventListener('change', applyTableFilters);
+
+    document.getElementById('resetFilterBtn').addEventListener('click', () => {
+      document.getElementById('filterNama').value = '';
+      document.getElementById('filterProgress').value = '';
+      document.getElementById('filterKbli').value = '';
+      document.getElementById('filterCatatan').value = '';
+      applyTableFilters();
+    });
+
+    document.getElementById('pageSizeSelect').addEventListener('change', (e) => {
+      state.pageSize = Number(e.target.value) || 10;
+      state.currentPage = 1;
+      renderTable();
+    });
+
+    document.getElementById('prevPageBtn').addEventListener('click', () => {
+      if (state.currentPage > 1) {
+        state.currentPage--;
+        renderTable();
+      }
+    });
+
+    document.getElementById('nextPageBtn').addEventListener('click', () => {
+      const totalPages = Math.max(1, Math.ceil(state.filteredRecords.length / state.pageSize));
+      if (state.currentPage < totalPages) {
+        state.currentPage++;
+        renderTable();
+      }
+    });
+
+    document.querySelectorAll('#pkkprTable th[data-sort]').forEach(th => {
+      th.addEventListener('click', () => {
+        const field = th.getAttribute('data-sort');
+        if (state.sortField === field) {
+          state.sortAsc = !state.sortAsc;
+        } else {
+          state.sortField = field;
+          state.sortAsc = true;
+        }
+        applyTableFilters();
+      });
+    });
+
+    /* ========================================================================
+       12. DETAIL MODAL, PROGRESS HISTORY & SAFE DELETE CONFIRMATION
+       ======================================================================== */
+    function openModal(title, bodyHtml, footerHtml = '', isSmall = false) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').innerHTML = bodyHtml;
+      document.getElementById('modalFooter').innerHTML = footerHtml;
+      document.getElementById('modalDialog').classList.toggle('modal-sm', isSmall);
+      document.getElementById('customModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('customModal').classList.add('hidden');
+    }
+
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    document.getElementById('customModal').addEventListener('click', (e) => {
+      if (e.target.id === 'customModal') closeModal();
+    });
+
+    async function viewRecordDetail(id) {
+      const rec = state.records.find(r => r.id === id);
+      if (!rec) return;
+
+      let progressDates = {};
+      try {
+        progressDates = typeof rec.progress_dates === 'string' && rec.progress_dates
+          ? JSON.parse(rec.progress_dates)
+          : (rec.progress_dates || {});
+      } catch (_) {
+        progressDates = {};
+      }
+
+      const stageListHtml = MILESTONES.map(m => {
+        const done = Boolean(rec[m.key]);
+        const firstDate = progressDates[m.key] ? formatDateID(progressDates[m.key], true) : 'Belum tercatat';
+        return `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0.7rem; border:1px solid var(--border-color); border-radius:6px; background:${done ? 'var(--color-success-soft)' : 'var(--bg-surface)'};">
+            <div>
+              <strong>${escapeHtml(m.label)}</strong>
+              <div class="form-hint" style="font-size:0.74rem;">Selesai pertama: ${escapeHtml(firstDate)}</div>
+            </div>
+            <span class="badge ${done ? 'badge-success' : 'badge-navy'}">${done ? 'SELESAI' : 'BELUM'}</span>
+          </div>
+        `;
+      }).join('');
+
+      const fileSection = (rec.file_url && rec.file_name)
+        ? `<a href="${escapeHtml(rec.file_url)}" target="_blank" rel="noopener noreferrer" class="btn btn-teal btn-sm">Buka Berkas (${escapeHtml(rec.file_name)})</a>`
+        : `<span class="form-hint">Tidak ada berkas terlampir</span>`;
+
+      const html = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:0.85rem; margin-bottom:1.1rem;">
+          <div><span class="form-hint">Nama Pemohon / Perusahaan</span><div style="font-weight:700;">${escapeHtml(rec.nama)}</div></div>
+          <div><span class="form-hint">KBLI</span><div style="font-weight:700;">${escapeHtml(rec.kbli)}</div></div>
+          <div><span class="form-hint">Kontak</span><div>${escapeHtml(rec.kontak || '-')}</div></div>
+          <div><span class="form-hint">Tanggal Input Data</span><div>${formatDateID(rec.created_at, true)}</div></div>
+          <div style="grid-column:1/-1;"><span class="form-hint">Alamat Pemohon</span><div>${escapeHtml(rec.alamat || '-')}</div></div>
+          <div style="grid-column:1/-1;"><span class="form-hint">Proyek Lokasi</span><div style="font-weight:600;">${escapeHtml(rec.proyek_lokasi)}</div></div>
+          <div style="grid-column:1/-1;"><span class="form-hint">Tindak Lanjut</span><div style="white-space:pre-wrap; background:var(--bg-surface); padding:0.65rem; border-radius:6px; border:1px solid var(--border-color);">${escapeHtml(rec.tindak_lanjut || '-')}</div></div>
+          <div style="grid-column:1/-1;"><span class="form-hint">Catatan Lengkap</span><div style="white-space:pre-wrap; background:var(--bg-surface); padding:0.65rem; border-radius:6px; border:1px solid var(--border-color);">${escapeHtml(rec.catatan || '-')}</div></div>
+          <div style="grid-column:1/-1;"><span class="form-hint">Dokumen Google Drive</span><div style="margin-top:4px;">${fileSection}</div></div>
+        </div>
+
+        <h3 style="font-size:0.95rem; margin-bottom:0.6rem;">Status &amp; Tanggal Penyelesaian 9 Tahapan</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:0.55rem; margin-bottom:1.1rem;">
+          ${stageListHtml}
+        </div>
+
+        <h3 style="font-size:0.95rem; margin-bottom:0.5rem;">Riwayat Log Perubahan Progress</h3>
+        <div id="detailHistoryBox" class="form-hint">Memuat riwayat perubahan...</div>
+      `;
+
+      openModal(
+        `Detail Permohonan — ${rec.nama}`,
+        html,
+        `<button type="button" class="btn btn-mustard btn-sm" onclick="closeModal(); openEditForm('${escapeHtml(rec.id)}')">Edit Data Ini</button>
+         <button type="button" class="btn btn-outline btn-sm" onclick="closeModal()">Tutup</button>`
+      );
+
+      try {
+        const histRes = await apiRequest('getProgressHistory', { recordId: id }, true);
+        const logs = Array.isArray(histRes.data) ? histRes.data : [];
+        const box = document.getElementById('detailHistoryBox');
+        if (!box) return;
+        if (logs.length === 0) {
+          box.textContent = 'Belum ada catatan riwayat perubahan progress.';
+        } else {
+          box.innerHTML = logs.map(l => `
+            <div style="padding:0.42rem 0.65rem; border-bottom:1px dashed var(--border-color); font-size:0.8rem;">
+              <strong>${escapeHtml(l.milestone)}</strong> &bull; ${escapeHtml(l.action)}
+              <span style="color:var(--text-muted);">(${formatDateID(l.timestamp, true)} oleh ${escapeHtml(l.username)})</span>
+            </div>
+          `).join('');
+        }
+      } catch (err) {
+        const box = document.getElementById('detailHistoryBox');
+        if (box) box.textContent = `Gagal memuat riwayat: ${err.message}`;
+      }
+    }
+
+    function confirmDeleteRecord(id) {
+      const rec = state.records.find(r => r.id === id);
+      if (!rec) return;
+
+      openModal(
+        'Konfirmasi Penghapusan Data',
+        `<div class="alert-box alert-danger">
+          <div>Apakah Anda yakin ingin menghapus permohonan PKKPR atas nama <strong>${escapeHtml(rec.nama)}</strong> (Lokasi: ${escapeHtml(rec.proyek_lokasi)})?</div>
+        </div>
+        <p class="form-hint">Tindakan ini akan menghapus data dari database utama dan mencatat aktivitas penghapusan pada log audit sistem.</p>`,
+        `<button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
+         <button type="button" id="confirmDeleteExecBtn" class="btn btn-danger" onclick="executeDeleteRecord('${escapeHtml(rec.id)}')">Ya, Hapus Permanen</button>`,
+        true
+      );
+    }
+
+    async function executeDeleteRecord(id) {
+      const btn = document.getElementById('confirmDeleteExecBtn');
+      if (btn) btn.disabled = true;
+
+      try {
+        const res = await apiRequest('deleteRecord', { id }, true);
+        closeModal();
+        showToast('Data Dihapus', res.message || 'Data permohonan berhasil dihapus.', 'success');
+        await loadAllData();
+      } catch (err) {
+        if (btn) btn.disabled = false;
+        showToast('Gagal Menghapus', err.message, 'error');
+      }
+    }
+
+    /* ========================================================================
+       13. EXPORT MODULE (CSV UTF-8 BOM, EXCEL .XLSX, PDF A4 LANDSCAPE)
+       ======================================================================== */
+    async function handleExport(scope, format) {
+      try {
+        let reportData;
+        let fileBaseName;
+        let periodLabel;
+
+        if (scope === 'monthly') {
+          const year = Number(document.getElementById('exportMonthYear').value);
+          const month = Number(document.getElementById('exportMonthSelect').value);
+          const monthName = MONTH_NAMES_ID[month];
+          const res = await apiRequest('getMonthlyReport', { year, month }, true);
+          reportData = res.data;
+          periodLabel = `Bulan ${monthName} ${year}`;
+          fileBaseName = `Laporan_PKKPR_${monthName}_${year}`;
+        } else {
+          const year = Number(document.getElementById('exportYearOnly').value);
+          const res = await apiRequest('getYearlyReport', { year }, true);
+          reportData = res.data;
+          periodLabel = `Tahun ${year}`;
+          fileBaseName = `Laporan_PKKPR_Tahun_${year}`;
+        }
+
+        renderExportPreview(scope, periodLabel, reportData);
+
+        if (format === 'csv') {
+          exportToCsv(scope, periodLabel, fileBaseName, reportData);
+        } else if (format === 'xlsx') {
+          exportToExcel(scope, periodLabel, fileBaseName, reportData);
+        } else if (format === 'pdf') {
+          exportToPdf(scope, periodLabel, fileBaseName, reportData);
+        }
+
+        showToast('Ekspor Berhasil', `File ${fileBaseName}.${format} berhasil dibuat dan diunduh.`, 'success');
+      } catch (err) {
+        showToast('Ekspor Gagal', err.message, 'error');
+      }
+    }
+
+    function renderExportPreview(scope, periodLabel, data) {
+      document.getElementById('exportPreviewPeriod').textContent = periodLabel;
+      const sum = data.completionSummary || {};
+      const regCount = (data.registeredRecords || []).length;
+
+      document.getElementById('exportPreviewContent').innerHTML = `
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; color:var(--text-primary);">
+          <div class="retro-card" style="padding:0.85rem;">
+            <div class="form-hint">Permohonan Terdaftar (${periodLabel})</div>
+            <div style="font-size:1.45rem; font-weight:800;">${formatNumberID(regCount)}</div>
+          </div>
+          <div class="retro-card" style="padding:0.85rem;">
+            <div class="form-hint">Survey Lapangan Selesai (${periodLabel})</div>
+            <div style="font-size:1.45rem; font-weight:800; color:var(--color-teal);">${formatNumberID(sum.survey_lapangan || 0)}</div>
+          </div>
+          <div class="retro-card" style="padding:0.85rem;">
+            <div class="form-hint">Rapat Forum Selesai (${periodLabel})</div>
+            <div style="font-size:1.45rem; font-weight:800; color:var(--color-mustard);">${formatNumberID(sum.rapat_forum || 0)}</div>
+          </div>
+          <div class="retro-card" style="padding:0.85rem;">
+            <div class="form-hint">Sudah Input Selesai (${periodLabel})</div>
+            <div style="font-size:1.45rem; font-weight:800; color:var(--color-orange);">${formatNumberID(sum.input || 0)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildExportRows(records) {
+      return records.map((r, i) => {
+        const doneCount = computeProgressCount(r);
+        const pct = Math.round((doneCount / MILESTONES.length) * 100);
+        return {
+          No: i + 1,
+          Tanggal_Daftar: formatDateID(r.created_at),
+          Nama: r.nama || '',
+          KBLI: r.kbli || '',
+          Kontak: r.kontak || '',
+          Alamat: r.alamat || '',
+          Proyek_Lokasi: r.proyek_lokasi || '',
+          Bayar: r.bayar ? 'Selesai' : 'Belum',
+          Pertek_BPN: r.pertek_bpn ? 'Selesai' : 'Belum',
+          FIKPOS: r.fikpos ? 'Selesai' : 'Belum',
+          Persiapan_Survey: r.persiapan_survey ? 'Selesai' : 'Belum',
+          Survey_Lapangan: r.survey_lapangan ? 'Selesai' : 'Belum',
+          Rapat_Forum: r.rapat_forum ? 'Selesai' : 'Belum',
+          BA_dan_Peta: r.ba_dan_peta ? 'Selesai' : 'Belum',
+          TTD: r.ttd ? 'Selesai' : 'Belum',
+          INPUT: r.input ? 'Selesai' : 'Belum',
+          Persentase_Progress: `${doneCount}/9 (${pct}%)`,
+          Tindak_Lanjut: r.tindak_lanjut || '',
+          Catatan: r.catatan || '',
+          Berkas: r.file_name || '-'
+        };
+      });
+    }
+
+    function exportToCsv(scope, periodLabel, fileBaseName, data) {
+      const rows = buildExportRows(data.registeredRecords || []);
+      const sum = data.completionSummary || {};
+      const lines = [];
+
+      lines.push(`"LAPORAN STATUS PROSES PENERBITAN PENILAIAN PKKPR KAB. KAMPAR"`);
+      lines.push(`"Periode Laporan","${periodLabel}"`);
+      lines.push(`"Tanggal Pembuatan","${formatDateID(new Date().toISOString(), true)}"`);
+      lines.push('');
+      lines.push(`"RINGKASAN STATISTIK PERIODE (${periodLabel.toUpperCase()})"`);
+      lines.push(`"Permohonan Baru Terdaftar pada Periode Ini","${rows.length}"`);
+      lines.push(`"Penyelesaian Survey Lapangan pada Periode Ini","${sum.survey_lapangan || 0}"`);
+      lines.push(`"Penyelesaian Rapat Forum pada Periode Ini","${sum.rapat_forum || 0}"`);
+      lines.push(`"Penyelesaian Sudah Input pada Periode Ini","${sum.input || 0}"`);
+      lines.push('');
+
+      if (scope === 'yearly' && Array.isArray(data.monthlyBreakdown)) {
+        lines.push(`"STATISTIK BULANAN JANUARI - DESEMBER"`);
+        lines.push(`"Bulan","Permohonan Masuk","Survey Lapangan Selesai","Rapat Forum Selesai","Sudah Input Selesai"`);
+        data.monthlyBreakdown.forEach(m => {
+          lines.push(`"${MONTH_NAMES_ID[m.month]}","${m.registered}","${m.survey_lapangan}","${m.rapat_forum}","${m.input}"`);
+        });
+        lines.push('');
+      }
+
+      lines.push(`"DATA PERMOHONAN TERDAFTAR PADA PERIODE ${periodLabel.toUpperCase()}"`);
+      const headers = [
+        'No', 'Tanggal Daftar', 'Nama', 'KBLI', 'Kontak', 'Alamat', 'Proyek Lokasi',
+        'Bayar', 'Pertek BPN', 'FIKPOS', 'Persiapan Survey', 'Survey Lapangan',
+        'Rapat Forum', 'BA dan Peta', 'TTD', 'INPUT', 'Progress', 'Tindak Lanjut', 'Catatan', 'Berkas'
+      ];
+      lines.push(headers.map(h => `"${h}"`).join(','));
+
+      rows.forEach(r => {
+        const vals = [
+          r.No, r.Tanggal_Daftar, r.Nama, r.KBLI, r.Kontak, r.Alamat, r.Proyek_Lokasi,
+          r.Bayar, r.Pertek_BPN, r.FIKPOS, r.Persiapan_Survey, r.Survey_Lapangan,
+          r.Rapat_Forum, r.BA_dan_Peta, r.TTD, r.INPUT, r.Persentase_Progress,
+          r.Tindak_Lanjut, r.Catatan, r.Berkas
+        ];
+        lines.push(vals.map(v => `"${String(v).replace(/"/g, '""')}"`).join(','));
+      });
+
+      const csvContent = '\uFEFF' + lines.join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      triggerDownload(blob, `${fileBaseName}.csv`);
+    }
+
+    function exportToExcel(scope, periodLabel, fileBaseName, data) {
+      const wb = XLSX.utils.book_new();
+      const sum = data.completionSummary || {};
+      const rows = buildExportRows(data.registeredRecords || []);
+
+      // Sheet 1: Ringkasan Statistik
+      const summarySheetData = [
+        ['LAPORAN STATUS PROSES PENERBITAN PENILAIAN KKPR KAB. KAMPAR'],
+        ['Periode Laporan', periodLabel],
+        ['Tanggal Pembuatan', formatDateID(new Date().toISOString(), true)],
+        [],
+        ['KATEGORI RINGKASAN', 'JUMLAH'],
+        ['1. Jumlah Permohonan Terdaftar pada Periode Terpilih', rows.length],
+        ['2. Penyelesaian Survey Lapangan (Berdasarkan Tanggal Selesai Pertama)', sum.survey_lapangan || 0],
+        ['3. Penyelesaian Rapat Forum (Berdasarkan Tanggal Selesai Pertama)', sum.rapat_forum || 0],
+        ['4. Penyelesaian Sudah Input (Berdasarkan Tanggal Selesai Pertama)', sum.input || 0],
+        [],
+        ['REKAPITULASI PENYELESAIAN 9 TAHAPAN PADA PERIODE TERPILIH', 'JUMLAH']
+      ];
+
+      MILESTONES.forEach(m => {
+        summarySheetData.push([m.label, sum[m.key] || 0]);
+      });
+
+      const wsSummary = XLSX.utils.aoa_to_sheet(summarySheetData);
+      wsSummary['!cols'] = [{ wch: 62 }, { wch: 22 }];
+      XLSX.utils.book_append_sheet(wb, wsSummary, 'Ringkasan_Statistik');
+
+      // Sheet 2 (Yearly): Statistik Bulanan Jan - Des
+      if (scope === 'yearly' && Array.isArray(data.monthlyBreakdown)) {
+        const monthlyAoA = [
+          ['STATISTIK BULANAN JANUARI SAMPAI DESEMBER (' + periodLabel.toUpperCase() + ')'],
+          [],
+          ['Bulan', 'Permohonan Terdaftar', 'Survey Lapangan Selesai', 'Rapat Forum Selesai', 'Sudah Input Selesai']
+        ];
+        data.monthlyBreakdown.forEach(m => {
+          monthlyAoA.push([
+            MONTH_NAMES_ID[m.month],
+            m.registered,
+            m.survey_lapangan,
+            m.rapat_forum,
+            m.input
+          ]);
+        });
+        const wsMonthly = XLSX.utils.aoa_to_sheet(monthlyAoA);
+        wsMonthly['!cols'] = [{ wch: 18 }, { wch: 22 }, { wch: 24 }, { wch: 22 }, { wch: 22 }];
+        XLSX.utils.book_append_sheet(wb, wsMonthly, 'Rekap_Bulanan_Jan_Des');
+      }
+
+      // Sheet 3: Data Permohonan
+      const wsData = XLSX.utils.json_to_sheet(
+        rows.length ? rows : [{ Keterangan: 'Tidak ada permohonan baru yang didaftarkan pada periode ini.' }]
+      );
+      wsData['!cols'] = [
+        { wch: 6 }, { wch: 14 }, { wch: 28 }, { wch: 22 }, { wch: 18 },
+        { wch: 30 }, { wch: 30 }, { wch: 12 }, { wch: 12 }, { wch: 12 },
+        { wch: 16 }, { wch: 16 }, { wch: 14 }, { wch: 14 }, { wch: 10 },
+        { wch: 10 }, { wch: 16 }, { wch: 32 }, { wch: 32 }, { wch: 24 }
+      ];
+      XLSX.utils.book_append_sheet(wb, wsData, 'Data_Permohonan');
+
+      XLSX.writeFile(wb, `${fileBaseName}.xlsx`);
+    }
+
+    function exportToPdf(scope, periodLabel, fileBaseName, data) {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+      const sum = data.completionSummary || {};
+      const records = data.registeredRecords || [];
+      const generatedAt = formatDateID(new Date().toISOString(), true);
+
+      doc.setFontSize(13);
+      doc.setFont('helvetica', 'bold');
+      doc.text('PEMERINTAH KABUPATEN KAMPAR', 14, 14);
+      doc.setFontSize(11);
+      doc.text('LAPORAN STATUS PROSES PENERBITAN PENILAIAN PKKPR', 14, 20);
+
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Periode Laporan: ${periodLabel}   |   Tanggal Pembuatan: ${generatedAt}`, 14, 26);
+
+      // Summary Table
+      doc.autoTable({
+        startY: 30,
+        head: [['Permohonan Masuk (Periode)', 'Survey Lapangan Selesai', 'Rapat Forum Selesai', 'Sudah Input Selesai']],
+        body: [[
+          formatNumberID(records.length),
+          formatNumberID(sum.survey_lapangan || 0),
+          formatNumberID(sum.rapat_forum || 0),
+          formatNumberID(sum.input || 0)
+        ]],
+        theme: 'grid',
+        headStyles: { fillColor: [22, 43, 73], textColor: 255, fontSize: 8.5 },
+        bodyStyles: { fontSize: 9.5, fontStyle: 'bold', halign: 'center' },
+        margin: { left: 14, right: 14 }
+      });
+
+      let nextY = doc.lastAutoTable.finalY + 6;
+
+      if (scope === 'yearly' && Array.isArray(data.monthlyBreakdown)) {
+        doc.setFontSize(9.5);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Rekapitulasi Bulanan (Januari - Desember)', 14, nextY);
+        doc.autoTable({
+          startY: nextY + 2,
+          head: [['Bulan', 'Permohonan Terdaftar', 'Survey Lapangan', 'Rapat Forum', 'Sudah Input']],
+          body: data.monthlyBreakdown.map(m => [
+            MONTH_NAMES_ID[m.month],
+            m.registered,
+            m.survey_lapangan,
+            m.rapat_forum,
+            m.input
+          ]),
+          theme: 'striped',
+          headStyles: { fillColor: [30, 107, 123], textColor: 255, fontSize: 8 },
+          bodyStyles: { fontSize: 8 },
+          margin: { left: 14, right: 14 }
+        });
+        nextY = doc.lastAutoTable.finalY + 6;
+      }
+
+      doc.setFontSize(9.5);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`Daftar Permohonan Terdaftar (${periodLabel})`, 14, nextY);
+
+      const tableBody = records.length
+        ? records.map((r, i) => {
+            const c = computeProgressCount(r);
+            return [
+              i + 1,
+              formatDateID(r.created_at),
+              r.nama || '-',
+              r.kbli || '-',
+              r.proyek_lokasi || '-',
+              `${c}/9 (${Math.round((c / 9) * 100)}%)`,
+              r.survey_lapangan ? 'Ya' : 'Belum',
+              r.rapat_forum ? 'Ya' : 'Belum',
+              r.input ? 'Ya' : 'Belum',
+              r.tindak_lanjut || '-',
+              r.catatan || '-'
+            ];
+          })
+        : [['-', '-', 'Tidak ada data permohonan pada periode ini.', '', '', '', '', '', '', '', '']];
+
+      doc.autoTable({
+        startY: nextY + 2,
+        head: [['No', 'Tgl Input', 'Nama', 'KBLI', 'Proyek Lokasi', 'Progress', 'Survey', 'Forum', 'Input', 'Tindak Lanjut', 'Catatan']],
+        body: tableBody,
+        theme: 'grid',
+        headStyles: { fillColor: [22, 43, 73], textColor: 255, fontSize: 7.5 },
+        bodyStyles: { fontSize: 7.3 },
+        columnStyles: {
+          0: { cellWidth: 9 },
+          1: { cellWidth: 20 },
+          2: { cellWidth: 34 },
+          3: { cellWidth: 24 },
+          4: { cellWidth: 36 },
+          5: { cellWidth: 20 },
+          6: { cellWidth: 14 },
+          7: { cellWidth: 14 },
+          8: { cellWidth: 14 },
+          9: { cellWidth: 42 },
+          10: { cellWidth: 42 }
+        },
+        margin: { left: 14, right: 14, bottom: 16 },
+        didDrawPage: function () {
+          const pageCount = doc.internal.getNumberOfPages();
+          const pageCurrent = doc.internal.getCurrentPageInfo().pageNumber;
+          doc.setFontSize(8);
+          doc.setFont('helvetica', 'normal');
+          doc.text(
+            `PKKPR Kab. Kampar - Halaman ${pageCurrent} dari ${pageCount}`,
+            doc.internal.pageSize.getWidth() - 14,
+            doc.internal.pageSize.getHeight() - 8,
+            { align: 'right' }
+          );
+        }
+      });
+
+      doc.save(`${fileBaseName}.pdf`);
+    }
+
+    function triggerDownload(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    /* ========================================================================
+       14. ADMIN CREDENTIAL MANAGEMENT
+       ======================================================================== */
+    document.getElementById('adminCredentialsForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (state.isSubmitting) return;
+
+      const currentPassword = document.getElementById('adminCurrentPassword').value;
+      const newUsername = document.getElementById('adminNewUsername').value.trim();
+      const newPassword = document.getElementById('adminNewPassword').value;
+      const confirmPassword = document.getElementById('adminConfirmPassword').value;
+
+      if (newUsername.length < 4) {
+        showToast('Validasi Username', 'Username baru minimal terdiri dari 4 karakter.', 'warning');
+        return;
+      }
+      if (newPassword.length < 8) {
+        showToast('Validasi Password', 'Password baru minimal terdiri dari 8 karakter.', 'warning');
+        return;
+      }
+      if (newPassword === 'admin123') {
+        showToast('Password Ditolak', 'Tidak boleh menggunakan kembali password default admin123.', 'warning');
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        showToast('Konfirmasi Tidak Cocok', 'Password baru dan konfirmasi password tidak sama.', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('saveAdminBtn');
+      state.isSubmitting = true;
+      btn.disabled = true;
+
+      try {
+        const res = await apiRequest('changeCredentials', {
+          currentPassword,
+          newUsername,
+          newPassword
+        }, true);
+
+        document.getElementById('adminCredentialsForm').reset();
+        state.token = '';
+        state.username = '';
+        state.mustChangePassword = false;
+        sessionStorage.clear();
+
+        showLoginScreen();
+        showToast(
+          'Kredensial Diperbarui',
+          res.message || 'Username dan password berhasil diubah. Silakan login kembali dengan akun baru.',
+          'success'
+        );
+      } catch (err) {
+        showToast('Gagal Mengubah Kredensial', err.message, 'error');
+      } finally {
+        state.isSubmitting = false;
+        btn.disabled = false;
+      }
+    });
+
+    /* ========================================================================
+       15. BOOTSTRAP & SESSION VERIFICATION ON LOAD
+       ======================================================================== */
+    window.addEventListener('offline', () => {
+      showToast('Koneksi Terputus', 'Perangkat Anda sedang offline. Perubahan tidak dapat disimpan.', 'warning');
+    });
+
+    window.addEventListener('online', () => {
+      showToast('Koneksi Pulih', 'Kembali terhubung ke internet.', 'success');
+    });
+
+    (async function bootstrapApp() {
+      // Dynamic footer year
+      const yearStr = String(new Date().getFullYear());
+      document.querySelectorAll('.current-year').forEach(el => { el.textContent = yearStr; });
+
+      document.getElementById('maxUploadLabel').textContent = `${APP_CONFIG.MAX_UPLOAD_MB} MB`;
+      initTheme();
+      initChecklistUI();
+
+      if (!state.token) {
+        showLoginScreen();
+        return;
+      }
+
+      try {
+        const valRes = await apiRequest('validateSession', {}, true);
+        state.username = valRes.data.username;
+        state.mustChangePassword = Boolean(valRes.data.mustChangePassword);
+        sessionStorage.setItem('pkkpr_user', state.username);
+        sessionStorage.setItem('pkkpr_must_change', String(state.mustChangePassword));
+
+        showAppShell();
+        await loadAllData();
+
+        if (state.mustChangePassword) {
+          promptMandatoryPasswordChange();
+        }
+      } catch (_) {
+        handleSessionExpired('Sesi Anda tidak valid atau telah kedaluwarsa.');
+      }
+    })();
+  </script>
+</body>
+</html>
